@@ -62,8 +62,12 @@ public class GameWorld {
                 for (int cur = 0; cur < xLargeFish.getNumberOfXLargeFish(); cur++) {
                     if (xLargeFish.getXLargeFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
 
-                        playerFish.updateStateOfFishByOtherFish("xlarge",cur);
+                        if(playerFish.isPlayerFishProtected()==true){
 
+                            xLargeFish.deleteXLargeFish(cur);
+                        }else {
+                            playerFish.updateStateOfFishByOtherFish("xlarge", cur);
+                        }
                     }
                 }
 
@@ -94,9 +98,12 @@ public class GameWorld {
                 if (mediumFish.getMediumFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
 
                     //playerFish.makeBirdInvisible();
+                    if(playerFish.isPlayerFishProtected()==true){
 
-                    playerFish.updateStateOfFishByOtherFish("medium",cur);
-
+                        mediumFish.deleteMediumFish(cur);
+                    }else {
+                        playerFish.updateStateOfFishByOtherFish("medium", cur);
+                    }
                 }
             }
 

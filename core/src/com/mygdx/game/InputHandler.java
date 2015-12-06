@@ -19,7 +19,7 @@ public class InputHandler implements InputProcessor {
 
         if(GameWorld.getGameState().equals("MainScreen")){
 
-            if(screenX>300 && screenX<900 && screenY>713 && screenY<1300){
+            if(screenX>800 && screenX<1200 && screenY>713 && screenY<1300){
 
                 GameWorld.updateGameState("PlayingGame");
 

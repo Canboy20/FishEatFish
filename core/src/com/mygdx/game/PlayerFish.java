@@ -17,7 +17,6 @@ public class PlayerFish {
     private Vector2 velocity;
     private Vector2 acceleration;
 
-    private float rotation;
     private int width;
     private int height;
     private Rectangle playerFishRectangle;
@@ -48,6 +47,14 @@ public class PlayerFish {
     boolean playerFishIsProtected;
     float protectionDuration=4;
 
+    private float rotation=0;
+
+
+
+
+
+
+
 
 
 
@@ -56,7 +63,7 @@ public class PlayerFish {
         this.width = width;
         this.height = height;
         position = new Vector2(x, y);
-        velocity = new Vector2(250, 0);
+        velocity = new Vector2(410, 0);
         acceleration = new Vector2(0, 460);
         this.gmw=gmw;
 
@@ -102,9 +109,9 @@ public class PlayerFish {
             position.add(velocity.cpy().scl(delta));
 
             if (position.x + currentFishWidth > 1200) {
-                velocity.x = -250;
+                velocity.x = -410;
             } else if (position.x < 0) {
-                velocity.x = 250;
+                velocity.x = 410;
             }
 
 
@@ -232,18 +239,16 @@ public class PlayerFish {
 
 
 
+        rotation -= 600 * delta;
 
-
-
-
-
-
-
-
-
-
+        if(rotation>360){
+            //rotation=0;
+        }
 
     }
+
+
+
 
 
 
@@ -452,7 +457,7 @@ public class PlayerFish {
         if (typeOfFish.equals("small")) {
             currentFish = "small";
 
-            velocity.x = 250;
+            velocity.x = 410;
             acceleration.y = 460;
 
             currentFishWidth = AssetStation.smallFish.getRegionWidth();
@@ -513,7 +518,7 @@ public class PlayerFish {
         if(typeOfFish.equals("small")){
             currentFish="small";
 
-            velocity.x=150;
+            velocity.x=410;
             acceleration.y=460;
 
             currentFishWidth=AssetStation.smallFish.getRegionWidth();

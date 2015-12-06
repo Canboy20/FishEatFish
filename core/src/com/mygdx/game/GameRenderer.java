@@ -216,6 +216,43 @@ public class GameRenderer {
 
 
 
+            //FishProtection
+            if(myWorld.getPlayerFish().isPlayerFishProtected()==true){
+
+                if(myWorld.getPlayerFish().getXVelocityOfPlayerFish()>0) {
+/*
+                    batcher.draw(AssetStation.spikesProtection,
+                            ((myWorld.getPlayerFish().getX() + bird.getWidth()) - AssetStation.spikesProtection.getRegionWidth())+AssetStation.spikesProtection.getRegionWidth()/8, myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
+                            AssetStation.spikesProtection.getRegionWidth() / 2.0f, AssetStation.spikesProtection.getRegionHeight() / 2.0f,
+                            AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight(), 1, 1, myWorld.getPlayerFish().getRotation());*/
+
+
+                    batcher.draw(AssetStation.spikesProtection,
+                            ((myWorld.getPlayerFish().getX() + bird.getWidth()) - AssetStation.spikesProtection.getRegionWidth())+AssetStation.spikesProtection.getRegionWidth()/8, myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
+
+                            AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight());
+
+                }else{
+/*
+                    batcher.draw(AssetStation.spikesProtection,
+                            myWorld.getPlayerFish().getX() - AssetStation.spikesProtection.getRegionWidth()/8  ,myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
+                            AssetStation.spikesProtection.getRegionWidth() / 2.0f, AssetStation.spikesProtection.getRegionHeight() / 2.0f,
+                            AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight(), 1, 1, myWorld.getPlayerFish().getRotation());
+                            */
+
+                    batcher.draw(AssetStation.spikesProtection,
+                            myWorld.getPlayerFish().getX() - AssetStation.spikesProtection.getRegionWidth()/8  ,myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
+                            AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight());
+
+
+                }
+
+            }
+
+
+
+
+
             if (myWorld.getPlayerFish().getTypeOfPlayerFish().equals("small")) {
 
 
@@ -274,14 +311,7 @@ public class GameRenderer {
 
 
 
-            //FishProtection
-            if(myWorld.getPlayerFish().isPlayerFishProtected()==true){
 
-                batcher.draw(AssetStation.spikesProtection,
-                        (myWorld.getPlayerFish().getX()+bird.getWidth())-AssetStation.spikesProtection.getRegionWidth(), myWorld.getPlayerFish().getY(),
-                        AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight());
-
-            }
 
 
 
@@ -290,7 +320,6 @@ public class GameRenderer {
             //DEAD FISHES EXPLOSION
 
             if(myWorld.getPlayerFish().isFishBeingDestroyed()==true) {
-
 
 
                 if(myWorld.getPlayerFish().getdeadFishType().equals("medium")) {
@@ -338,9 +367,6 @@ public class GameRenderer {
                         }
 
                     }
-
-
-
 
 
 
@@ -449,11 +475,14 @@ public class GameRenderer {
                             AssetStation.largeFish.getRegionWidth(), AssetStation.largeFish.getRegionHeight());
 */
 
-
-
-
-
             }
+
+
+
+
+
+
+
 
 
             if(myWorld.getPufferFish().isPufferFishIsAvailable()==true) {
