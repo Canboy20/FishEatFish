@@ -108,6 +108,10 @@ public class GameRenderer {
             // End ShapeRenderer
             shapeRenderer.end();
 
+
+
+
+
             // Begin SpriteBatch
             batcher.begin();
             // Disable transparency
@@ -145,6 +149,26 @@ public class GameRenderer {
 
 
             batcher.end();
+
+
+
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.circle(500, 500, 32);
+
+            shapeRenderer.circle(700, 1200, 32);
+
+            shapeRenderer.circle(100, 100, 32);
+
+            shapeRenderer.circle(600, 1700, 32);
+
+            shapeRenderer.circle(200, 900, 32);
+
+            shapeRenderer.circle(100, 100, 32);
+
+
+            shapeRenderer.end();
+
+
 
 
             batcher2.begin();
@@ -488,20 +512,66 @@ public class GameRenderer {
             if(myWorld.getPufferFish().isPufferFishIsAvailable()==true) {
 
 
-                if(myWorld.getPufferFish().getVelocityX()>0) {
-                    batcher.draw(AssetStation.pufferFishAnimation.getKeyFrame(runTime),
-                            myWorld.getPufferFish().getPufferFishRectangle().getX(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
-                            AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
+                //Will draw alert at first
 
-                }else{
-                    batcher.draw(AssetStation.pufferFishAnimation.getKeyFrame(runTime),
-                            myWorld.getPufferFish().getPufferFishRectangle().getX(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
-                            -AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
+                if(myWorld.getPufferFish().isPufferFishAlertBeingDisplayed()==true){
+
+                    if(myWorld.getPufferFish().getY()<gameHeight/2){
+
+                        if(myWorld.getPufferFish().getX()<600) {
+                            batcher.draw(AssetStation.pufferAlertTop,
+                                    0, myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                    AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
+                        }else{
+                            batcher.draw(AssetStation.pufferAlertTop,
+                                    1200-AssetStation.pufferAlertTop.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                    AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
+                        }
+
+
+
+
+                    }else if(myWorld.getPufferFish().getY()>gameHeight/2){
+
+                        if(myWorld.getPufferFish().getX()<600) {
+                            batcher.draw(AssetStation.pufferAlertBottom,
+                                    0, myWorld.getPufferFish().getPufferFishRectangle().getY()-AssetStation.pufferAlertTop.getRegionHeight(),
+                                    AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
+                        }else{
+                            batcher.draw(AssetStation.pufferAlertBottom,
+                                    1200-AssetStation.pufferAlertTop.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY()-AssetStation.pufferAlertTop.getRegionHeight(),
+                                    AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
+                        }
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+                }else {
+
+
+                    if (myWorld.getPufferFish().getVelocityX() > 0) {
+                        batcher.draw(AssetStation.pufferFishAnimation.getKeyFrame(runTime),
+                                myWorld.getPufferFish().getPufferFishRectangle().getX(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
+
+                    } else {
+                        batcher.draw(AssetStation.pufferFishAnimation.getKeyFrame(runTime),
+                                myWorld.getPufferFish().getPufferFishRectangle().getX(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                -AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
+
+                    }
+
 
                 }
-
-
-
 
 
 

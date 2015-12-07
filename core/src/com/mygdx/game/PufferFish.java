@@ -17,10 +17,14 @@ public class PufferFish {
     Vector2 velocityPufferFish;
     Rectangle rectanglePufferFish;
     boolean pufferFishIsAvailable=false;
+    boolean pufferFishAlertIsDisplayed=false;
 
 
 
-    float timeLeftForNewFish=20;
+
+    float timeLeftForNewFish=17;
+    float pufferFishAlert=3;
+
 
 
     int width,height;
@@ -58,7 +62,9 @@ public class PufferFish {
         if (timeLeftForNewFish < 0) {
 
             pufferFishIsAvailable=true;
-            timeLeftForNewFish = 20;
+            pufferFishAlertIsDisplayed=true;
+            timeLeftForNewFish = 17;
+            pufferFishAlert=3;
             generateNewPosForPufferFish();
 
 
@@ -66,20 +72,39 @@ public class PufferFish {
 
 
         if(pufferFishIsAvailable==true) {
-            positionPufferFish.add(velocityPufferFish.cpy().scl(delta));
-            curXpos = positionPufferFish.x;
-            curYpos = positionPufferFish.y;
 
-            rectanglePufferFish.set(curXpos, curYpos, width, height);
+            if (pufferFishAlert > 0) {
+                pufferFishAlert = pufferFishAlert - Gdx.graphics.getDeltaTime();
 
 
-            if (curXpos > 1200) {
 
-                pufferFishIsAvailable = false;
 
-            } else if (curXpos < -width) {
 
-                pufferFishIsAvailable = false;
+
+            } else {
+                pufferFishAlertIsDisplayed=false;
+
+
+                positionPufferFish.add(velocityPufferFish.cpy().scl(delta));
+                curXpos = positionPufferFish.x;
+                curYpos = positionPufferFish.y;
+
+                rectanglePufferFish.set(curXpos, curYpos, width, height);
+
+
+                if (curXpos > 1200) {
+
+                    pufferFishIsAvailable = false;
+                    pufferFishAlert=3;
+
+                } else if (curXpos < -width) {
+
+                    pufferFishIsAvailable = false;
+                    pufferFishAlert=3;
+
+
+
+                }
 
 
             }
@@ -103,6 +128,11 @@ public class PufferFish {
 
 
 
+    public boolean isPufferFishAlertBeingDisplayed(){
+
+        return pufferFishAlertIsDisplayed;
+    }
+
 
 
 
@@ -116,6 +146,19 @@ public class PufferFish {
     }
 
 
+    public float getX(){
+
+        return rectanglePufferFish.getX();
+    }
+
+
+
+
+
+    public float getY(){
+
+        return rectanglePufferFish.getY();
+    }
 
 
 

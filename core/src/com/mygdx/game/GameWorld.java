@@ -22,7 +22,7 @@ public class GameWorld {
 
         playerFish = new PlayerFish(this,400, midPointY - 5,35, 34);
         jaws=new Jaws(1200, 920);
-        pufferFish=new PufferFish(0,0,AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
+        pufferFish=new PufferFish(0,0,AssetStation.pufferFish.getRegionWidth()-100, AssetStation.pufferFish.getRegionHeight());
         xLargeFish =new XLargeFish(0,0,550, 323);
         largeFish =new LargeFish(800,midPointY,395, 236);
         mediumFish=new MediumFish(0,0,234, 214);
@@ -125,9 +125,17 @@ public class GameWorld {
 
                 if(playerFish.getPlayerFishRectangle().overlaps(pufferFish.getPufferFishRectangle())){
 
-                    playerFish.updateStateOfFishBySpikeOrPufferFish();
-                    pufferFish.deletePufferFish();
-                    AssetStation.puff.play();
+                    if(playerFish.isPlayerFishProtected()==true){
+
+                        pufferFish.deletePufferFish();
+                        AssetStation.puff.play();
+
+                    }else {
+
+                        playerFish.updateStateOfFishBySpikeOrPufferFish();
+                        pufferFish.deletePufferFish();
+                        AssetStation.puff.play();
+                    }
 
 
                 }

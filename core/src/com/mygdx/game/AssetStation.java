@@ -86,6 +86,9 @@ public class AssetStation {
 
     public static TextureRegion spikesProtection;
 
+    public static TextureRegion pufferAlertTop,pufferAlertBottom;
+
+
 
 
 
@@ -185,6 +188,18 @@ public class AssetStation {
 
         pufferFishDown = new TextureRegion(texture, 1603, 352, 231, 224);
         pufferFishDown.flip(false, true);
+
+
+        //PufferFish Alerts
+
+        pufferAlertTop = new TextureRegion(texture, 18, 1750, 120, 120);
+        pufferAlertTop.flip(false, true);
+
+        pufferAlertBottom = new TextureRegion(texture, 18, 1902, 120, 120);
+        pufferAlertBottom.flip(false, true);
+
+
+
 
 
 

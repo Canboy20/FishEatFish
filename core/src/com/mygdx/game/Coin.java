@@ -44,11 +44,11 @@ public class Coin {
         this.width=width;
         this.height=height;
         positionCoin=new Vector2(0,0);
-        velocityCoin=new Vector2(190,190);
+        velocityCoin=new Vector2(190,200);
         coinRect=new Rectangle(0,0,0,0);
 
         positionCoin2=new Vector2(0,0);
-        velocityCoin2=new Vector2(190,190);
+        velocityCoin2=new Vector2(190,200);
         coinRect2=new Rectangle(0,0,0,0);
 
     }
@@ -164,7 +164,7 @@ public class Coin {
             int randomer2=(int)(Math.random()*1000);
 
             positionCoin.set(randomer2,0);
-            velocityCoin.set(0, 190);
+            velocityCoin.set(0, 200);
 
 
 
@@ -173,7 +173,7 @@ public class Coin {
             int randomer2=(int)(Math.random()*1000);
 
             positionCoin.set(randomer2,1800);
-            velocityCoin.set(0,-190);
+            velocityCoin.set(0,-200);
 
 
 
@@ -243,7 +243,7 @@ public class Coin {
             int randomer2=(int)(Math.random()*1000);
 
             positionCoin2.set(randomer2,0);
-            velocityCoin2.set(0, 190);
+            velocityCoin2.set(0, 200);
 
 
 
@@ -252,7 +252,7 @@ public class Coin {
             int randomer2=(int)(Math.random()*1000);
 
             positionCoin2.set(randomer2,1800);
-            velocityCoin2.set(0,-190);
+            velocityCoin2.set(0,-200);
 
 
 
