@@ -153,17 +153,12 @@ public class GameRenderer {
 
 
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer.circle(500, 500, 32);
+            shapeRenderer.circle(600, 300, 40);
 
-            shapeRenderer.circle(700, 1200, 32);
+            shapeRenderer.circle(200, 1600, 40);
 
-            shapeRenderer.circle(100, 100, 32);
+            shapeRenderer.circle(1000, 1600, 40);
 
-            shapeRenderer.circle(600, 1700, 32);
-
-            shapeRenderer.circle(200, 900, 32);
-
-            shapeRenderer.circle(100, 100, 32);
 
 
             shapeRenderer.end();
