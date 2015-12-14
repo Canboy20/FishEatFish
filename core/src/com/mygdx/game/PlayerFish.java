@@ -33,6 +33,8 @@ public class PlayerFish {
 
     GameWorld gmw;
 
+    private float muliplier=1;
+
 
 
     private float currentFishWidth,currentFishHeight;
@@ -109,10 +111,12 @@ public class PlayerFish {
             position.add(velocity.cpy().scl(delta));
 
             if (position.x + currentFishWidth > 1200) {
-                velocity.x = -410;
+                velocity.x = -410*muliplier;
             } else if (position.x < 0) {
-                velocity.x = 410;
+                velocity.x = 410*muliplier;
             }
+
+          //  velocity.x =velocity.x-100f*Gdx.graphics.getDeltaTime();
 
 
 
@@ -129,9 +133,9 @@ public class PlayerFish {
             position.add(velocity.cpy().scl(delta));
 
             if (position.x + currentFishWidth > 1200) {
-                velocity.x = -125;
+                velocity.x = -250;
             } else if (position.x < 0) {
-                velocity.x = 125;
+                velocity.x = 250;
             }
 
 
@@ -158,9 +162,9 @@ public class PlayerFish {
             position.add(velocity.cpy().scl(delta));
 
             if (position.x + currentFishWidth > 1200) {
-                velocity.x = -100;
+                velocity.x = -150;
             } else if (position.x < 0) {
-                velocity.x = 100;
+                velocity.x = 150;
             }
 
 
@@ -457,7 +461,7 @@ public class PlayerFish {
         if (typeOfFish.equals("small")) {
             currentFish = "small";
 
-            velocity.x = 410;
+            velocity.x = 410*muliplier;
             acceleration.y = 460;
 
             currentFishWidth = AssetStation.smallFish.getRegionWidth();
@@ -467,7 +471,7 @@ public class PlayerFish {
         } else if (typeOfFish.equals("medium")) {
 
             currentFish = "medium";
-            velocity.x = 120;
+            velocity.x = 250;
             acceleration.y = 460;
 
             currentFishWidth = AssetStation.mediumFish.getRegionWidth();
@@ -481,7 +485,7 @@ public class PlayerFish {
         } else if (typeOfFish.equals("large")) {
 
             currentFish = "large";
-            velocity.x = 100;
+            velocity.x = 150;
             acceleration.y = 460;
 
             currentFishWidth = AssetStation.largeFish.getRegionWidth();
@@ -518,7 +522,7 @@ public class PlayerFish {
         if(typeOfFish.equals("small")){
             currentFish="small";
 
-            velocity.x=410;
+            velocity.x=410*muliplier;
             acceleration.y=460;
 
             currentFishWidth=AssetStation.smallFish.getRegionWidth();
@@ -527,7 +531,7 @@ public class PlayerFish {
         }else if(typeOfFish.equals("medium")){
 
             currentFish="medium";
-            velocity.x=120;
+            velocity.x=250;
             acceleration.y=460;
 
             currentFishWidth=AssetStation.mediumFish.getRegionWidth();
@@ -541,7 +545,7 @@ public class PlayerFish {
         }else if(typeOfFish.equals("large")){
 
             currentFish="large";
-            velocity.x=100;
+            velocity.x=150;
             acceleration.y=460;
 
             currentFishWidth=AssetStation.largeFish.getRegionWidth();
@@ -727,6 +731,16 @@ public class PlayerFish {
 
     public boolean isPlayerFishProtected(){
         return playerFishIsProtected;
+    }
+
+
+    public void increaseMuliplier(){
+        muliplier=3;
+    }
+
+
+    public void revertToNormalMultiplier(){
+        muliplier=1;
     }
 
 }

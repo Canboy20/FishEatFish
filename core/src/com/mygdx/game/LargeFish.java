@@ -62,7 +62,7 @@ public class LargeFish {
     public void updateLargeFishPosition(float delta){
 
 
-        if(getNumberOfLargeFish()<5) {
+        if(getNumberOfLargeFish()<4) {
             timeLeftForNewFish = timeLeftForNewFish - Gdx.graphics.getDeltaTime();
             if(timeLeftForNewFish<0){
                 timeLeftForNewFish=6;

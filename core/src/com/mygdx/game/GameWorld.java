@@ -15,6 +15,8 @@ public class GameWorld {
     private MediumFish mediumFish;
     private Spike spike;
     private Coin coin;
+    private SuperEffects superEffects;
+
     private static String gameState;
 
     public GameWorld(int midPointY) {
@@ -28,6 +30,7 @@ public class GameWorld {
         mediumFish=new MediumFish(0,0,234, 214);
         spike=new Spike(playerFish,129, 142);
         coin=new Coin(106, 103);
+        superEffects=new SuperEffects();
 
         gameState="MainScreen";   //At start main screen will be shown
 
@@ -55,6 +58,7 @@ public class GameWorld {
             mediumFish.updateMediumFishPosition(delta);
             spike.update(delta);
             coin.update(delta,playerFish.getHealthHP());
+            superEffects.update(delta);
 
 
 
@@ -65,6 +69,9 @@ public class GameWorld {
                         if(playerFish.isPlayerFishProtected()==true){
 
                             xLargeFish.deleteXLargeFish(cur);
+                            playerFish.increasePointsGained();
+
+
                         }else {
                             playerFish.updateStateOfFishByOtherFish("xlarge", cur);
                         }
@@ -85,6 +92,8 @@ public class GameWorld {
                         if(playerFish.isPlayerFishProtected()==true){
 
                             largeFish.deleteLargeFish(cur);
+                            playerFish.increasePointsGained();
+
                         }else {
                             playerFish.updateStateOfFishByOtherFish("large", cur);
                         }
@@ -101,6 +110,8 @@ public class GameWorld {
                     if(playerFish.isPlayerFishProtected()==true){
 
                         mediumFish.deleteMediumFish(cur);
+                        playerFish.increasePointsGained();
+
                     }else {
                         playerFish.updateStateOfFishByOtherFish("medium", cur);
                     }
@@ -129,6 +140,8 @@ public class GameWorld {
 
                         pufferFish.deletePufferFish();
                         AssetStation.puff.play();
+                        playerFish.increasePointsGained();
+
 
                     }else {
 
@@ -140,6 +153,30 @@ public class GameWorld {
 
                 }
             }
+
+
+
+            if(superEffects.hasPlayerThrownCoin()==true){
+
+                for(int i=0;i<xLargeFish.getNumberOfXLargeFish();i++){
+                    if(superEffects.getSuperEffectCoinRect().overlaps(xLargeFish.getXLargeFishRectangle(i))){
+                        xLargeFish.deleteXLargeFish(i);
+                        playerFish.increasePointsGained();
+                    }
+
+                }
+
+
+                for(int i=0;i<largeFish.getNumberOfLargeFish();i++) {
+                    if (superEffects.getSuperEffectCoinRect().overlaps(largeFish.getLargeFishRectangle(i))) {
+                        largeFish.deleteLargeFish(i);
+                        playerFish.increasePointsGained();
+
+                    }
+                }
+
+            }
+
 
 
 
@@ -278,6 +315,10 @@ public class GameWorld {
 
     public Coin getCoin(){
         return coin;
+    }
+
+    public SuperEffects getSuperEffects(){
+        return superEffects;
     }
 
 

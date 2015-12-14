@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -27,6 +28,9 @@ public class GameRenderer {
 
     private int midPointY;
     private int gameHeight;
+
+
+    float ssssssss=600 -AssetStation.coin.getRegionWidth()/2;
 
 
 
@@ -151,7 +155,7 @@ public class GameRenderer {
             batcher.end();
 
 
-
+/*
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.circle(600, 300, 40);
 
@@ -159,15 +163,24 @@ public class GameRenderer {
 
             shapeRenderer.circle(1000, 1600, 40);
 
+            shapeRenderer.setColor(Color.RED);
+
+            if(myWorld.getPlayerFish().getTypeOfPlayerFish().equals("small")) {
+                shapeRenderer.rectLine(600, 300, myWorld.getPlayerFish().getX(), myWorld.getPlayerFish().getY() + myWorld.getPlayerFish().getPlayerFishRectangle().getHeight() / 2, 10);
+            }
+
 
 
             shapeRenderer.end();
 
-
+*/
 
 
             batcher2.begin();
-            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 570, gameHeight/2 + 125/2);
+
+
+            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()) , 570 -(((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) -1) *50)
+                    , gameHeight / 2 + 125 / 2);
             batcher2.end();
 
 
@@ -231,6 +244,13 @@ public class GameRenderer {
             }
 
 
+            //TESTING ONLY
+
+
+
+            batcher.draw(AssetStation.coin,
+                    myWorld.getSuperEffects().getxPos(), myWorld.getSuperEffects().getyPos(),
+                    AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
 
 
