@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -18,6 +19,12 @@ public class InputHandler implements InputProcessor {
     public float previousX;
     public float previousY;
 
+    float x = Gdx.graphics.getWidth();
+    float y = Gdx.graphics.getHeight();
+
+    float ratioX =  1200/x; //being your screen size that you're developing with
+    float ratioY =  1900/y;
+
 
 
     // Ask for a reference to the Bird when InputHandler is created.
@@ -35,7 +42,7 @@ public class InputHandler implements InputProcessor {
 
         if(GameWorld.getGameState().equals("MainScreen")){
 
-            if(screenX>800 && screenX<1200 && screenY>713 && screenY<1300){
+            if(screenX*ratioX>350 && screenX*ratioX<850 && screenY*ratioY>880 && screenY*ratioY<1070){
 
                 GameWorld.updateGameState("PlayingGame");
 
@@ -49,7 +56,8 @@ public class InputHandler implements InputProcessor {
 
 
             //TESTING
-            if(superEffects.getTypeOfSuperEffect().equals("coinThrow") && superEffects.hasPlayerThrownCoin()==false && screenX>(600)-AssetStation.coin.getRegionWidth()/2  ){
+            if(superEffects.getTypeOfSuperEffect().equals("coinThrow") && superEffects.hasPlayerThrownCoin()==false && screenX*ratioX>(600-AssetStation.coinLarge.getRegionWidth()/2) && screenX*ratioX< (600-AssetStation.coinLarge.getRegionWidth()/2) + AssetStation.coinLarge.getRegionWidth() &&
+                    screenY*ratioY>(1900/2)-AssetStation.coinLarge.getRegionHeight()/2 && screenY*ratioY<((1900/2)-AssetStation.coinLarge.getRegionHeight()/2) + AssetStation.coinLarge.getRegionHeight() ){
                 AssetStation.healthgained.play();
                 situationMiddle=true;
                 previousX=screenX;
@@ -88,7 +96,7 @@ public class InputHandler implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
 
-        if(situationMiddle==true){
+        if(situationMiddle==true && GameWorld.getGameState().equals("PlayingGame")){
 
             if(Math.abs(previousX-screenX)<40){
 

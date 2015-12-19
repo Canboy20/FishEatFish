@@ -39,6 +39,7 @@ public class MediumFish {
     int randomRowToPlace;
 
 
+    private float decreaser=0;
 
 
 
@@ -54,7 +55,7 @@ public class MediumFish {
 
         positionMediumFish.add(new Vector2(x, y));
 
-        velocityMediumFish.add(new Vector2(250, 0));
+        velocityMediumFish.add(new Vector2(250, decreaser));
 
         rectangleMediumFish.add(new Rectangle(x, y, width, height));
 
@@ -157,14 +158,14 @@ public class MediumFish {
         if(randomRowToPlace==0){
 
             positionMediumFish.add(new Vector2(-width, 0));
-            velocityMediumFish.add(new Vector2(250, 0));
+            velocityMediumFish.add(new Vector2(250, decreaser));
             rectangleMediumFish.add(new Rectangle(-width, 0, width, height));
 
 
         }else if(randomRowToPlace==1){
 
             positionMediumFish.add(new Vector2(1200, 2 * AssetStation.largeFish.getRegionHeight()));
-            velocityMediumFish.add(new Vector2(-250, 0));
+            velocityMediumFish.add(new Vector2(-250, decreaser));
             rectangleMediumFish.add(new Rectangle(1200, 2 * AssetStation.largeFish.getRegionHeight(), width, height));
 
 
@@ -172,13 +173,13 @@ public class MediumFish {
         }else if(randomRowToPlace==2){
 
             positionMediumFish.add(new Vector2(-width, 4 * AssetStation.largeFish.getRegionHeight()));
-            velocityMediumFish.add(new Vector2(250, 0));
+            velocityMediumFish.add(new Vector2(250, decreaser));
             rectangleMediumFish.add(new Rectangle(-width, 4 * AssetStation.largeFish.getRegionHeight(), width, height));
 
         }else if(randomRowToPlace==3){
 
             positionMediumFish.add(new Vector2(1200, 6 * AssetStation.largeFish.getRegionHeight()));
-            velocityMediumFish.add(new Vector2(-250, 0));
+            velocityMediumFish.add(new Vector2(-250, decreaser));
             rectangleMediumFish.add(new Rectangle(1200, 6 * AssetStation.largeFish.getRegionHeight(), width, height));
 
 
@@ -186,7 +187,7 @@ public class MediumFish {
         }else if(randomRowToPlace==4){
 
             positionMediumFish.add(new Vector2(-width, 12 * AssetStation.largeFish.getRegionHeight()));
-            velocityMediumFish.add(new Vector2(250, 0));
+            velocityMediumFish.add(new Vector2(250,decreaser));
             rectangleMediumFish.add(new Rectangle(-width, 12 * AssetStation.largeFish.getRegionHeight(), width, height));
 
 
@@ -194,7 +195,7 @@ public class MediumFish {
         }else if(randomRowToPlace==5){
 
             positionMediumFish.add(new Vector2(1200, 14 * AssetStation.largeFish.getRegionHeight()));
-            velocityMediumFish.add(new Vector2(-250, 0));
+            velocityMediumFish.add(new Vector2(-250, decreaser));
             rectangleMediumFish.add(new Rectangle(1200, 14 * AssetStation.largeFish.getRegionHeight(), width, height));
 
 

@@ -34,6 +34,8 @@ public class XLargeFish {
 
     int randomRowToPlace;
 
+    private float decreaser=0;
+
 
     public XLargeFish(float x, float y, int width, int height) {
         this.width = width;
@@ -46,7 +48,7 @@ public class XLargeFish {
 
         positionXLargeFish.add(new Vector2(x,y));
 
-        velocityXLargeFish.add(new Vector2(100, 0));
+        velocityXLargeFish.add(new Vector2(100, decreaser));
 
         rectangleXLargeFish.add(new Rectangle(x, y, width, height));
 
@@ -112,6 +114,7 @@ public class XLargeFish {
 
     public void deleteXLargeFish(int cur){
 
+
         rectangleXLargeFish.remove(cur);
         positionXLargeFish.remove(cur);
         velocityXLargeFish.remove(cur);
@@ -138,14 +141,14 @@ public class XLargeFish {
         if(randomRowToPlace==0){
 
             positionXLargeFish.add(new Vector2(-width,0));
-            velocityXLargeFish.add(new Vector2(100, 0));
+            velocityXLargeFish.add(new Vector2(100, decreaser));
             rectangleXLargeFish.add(new Rectangle(-width, 0, width, height));
 
 
         }else if(randomRowToPlace==1){
 
             positionXLargeFish.add(new Vector2(800,AssetStation.xLargeFish.getRegionHeight()));
-            velocityXLargeFish.add(new Vector2(-100, 0));
+            velocityXLargeFish.add(new Vector2(-100, decreaser));
             rectangleXLargeFish.add(new Rectangle(1200, AssetStation.xLargeFish.getRegionHeight(), width, height));
 
 
@@ -153,13 +156,13 @@ public class XLargeFish {
         }else if(randomRowToPlace==2){
 
             positionXLargeFish.add(new Vector2(-width,2*AssetStation.xLargeFish.getRegionHeight()));
-            velocityXLargeFish.add(new Vector2(100, 0));
+            velocityXLargeFish.add(new Vector2(100, decreaser));
             rectangleXLargeFish.add(new Rectangle(-width, 2 * AssetStation.xLargeFish.getRegionHeight(), width, height));
 
         }else if(randomRowToPlace==3){
 
             positionXLargeFish.add(new Vector2(800,3*AssetStation.xLargeFish.getRegionHeight()));
-            velocityXLargeFish.add(new Vector2(-100, 0));
+            velocityXLargeFish.add(new Vector2(-100, decreaser));
             rectangleXLargeFish.add(new Rectangle(1200, 3 * AssetStation.xLargeFish.getRegionHeight(), width, height));
 
 
@@ -167,7 +170,7 @@ public class XLargeFish {
         }else if(randomRowToPlace==4){
 
             positionXLargeFish.add(new Vector2(-width,4*AssetStation.xLargeFish.getRegionHeight()));
-            velocityXLargeFish.add(new Vector2(100, 0));
+            velocityXLargeFish.add(new Vector2(100, decreaser));
             rectangleXLargeFish.add(new Rectangle(-width, 4 * AssetStation.xLargeFish.getRegionHeight(), width, height));
 
 
@@ -175,7 +178,7 @@ public class XLargeFish {
         }else if(randomRowToPlace==5){
 
             positionXLargeFish.add(new Vector2(1200,5*AssetStation.xLargeFish.getRegionHeight()));
-            velocityXLargeFish.add(new Vector2(-100, 0));
+            velocityXLargeFish.add(new Vector2(-100, decreaser));
             rectangleXLargeFish.add(new Rectangle(1200, 5 * AssetStation.xLargeFish.getRegionHeight(), width, height));
 
 

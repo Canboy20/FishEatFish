@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +20,7 @@ public class AssetStation {
     public static Texture textureBackground;
     public static Texture textureJaws;
     public static Texture mainScreenbackground;
+    public static Texture gameoverScreen;
 
 
     public static TextureRegion bg, grass;
@@ -58,7 +60,7 @@ public class AssetStation {
 
 
 
-    public static TextureRegion mainscreenbackgroundPlay,background;
+    public static TextureRegion mainscreenbackgroundPlay,background,gameoverBackground;
 
     public static TextureRegion spikes;
 
@@ -82,18 +84,16 @@ public class AssetStation {
     public static TextureRegion redTriangle,yellowTriangle,greenTriangle;
 
 
-    public static TextureRegion coin,coinHealth,coinSpikes;
+    public static TextureRegion coin,coinLarge,coinHealth,coinSpikes;
 
     public static TextureRegion spikesProtection;
 
     public static TextureRegion pufferAlertTop,pufferAlertBottom;
 
+    public static TextureRegion greenDirt;
 
 
-
-
-
-
+    private static Preferences topHighScore;
 
 
 
@@ -105,6 +105,9 @@ public class AssetStation {
 
         mainScreenbackground = new Texture(Gdx.files.internal("data/mainscreenTexture.jpg"));
         mainScreenbackground.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
+        gameoverScreen = new Texture(Gdx.files.internal("data/gameoverScreen.png"));
+        gameoverScreen.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
 
 
@@ -129,6 +132,10 @@ public class AssetStation {
         background = new TextureRegion(textureBackground, 0, 0, 1200, 1900);
         background.flip(false, true);
 
+        gameoverBackground = new TextureRegion(gameoverScreen, 0, 0, 1200, 1900);
+        gameoverBackground.flip(false, true);
+
+
 
         grass = new TextureRegion(texture, 0, 43, 143, 11);
         grass.flip(false, true);
@@ -144,6 +151,8 @@ public class AssetStation {
         coin = new TextureRegion(texture, 1148+115, 1804, 115/*106*/, 103);
         coin.flip(false, true);
 
+        coinLarge = new TextureRegion(texture, 296, 1369, 121, 124);
+        coinLarge.flip(false, true);
 
         coinHealth = new TextureRegion(texture, 1639, 1804, 115/*106*/, 103);
         coinHealth.flip(false, true);
@@ -297,6 +306,11 @@ public class AssetStation {
         spikes = new TextureRegion(texture, 29, 1569, 129, 142);
         spikes.flip(false, true);
 
+
+        //Green Dirt
+        greenDirt = new TextureRegion(texture, 1544, 1522, 356, 242);
+        greenDirt.flip(false, true);
+
         TextureRegion[] small = { smallFishDown, smallFish, smallFishUp };
         smallFishAnimation = new Animation(0.1f, small);
         smallFishAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
@@ -356,8 +370,14 @@ public class AssetStation {
 
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gamemusic.mp3"));
 
+        topHighScore = Gdx.app.getPreferences("FishEatFishHighScore");
 
 
+
+        //Holds best score
+        if (!topHighScore.contains("highScore")) {
+            topHighScore.putInteger("highScore", 0);
+        }
 
 
 
@@ -371,4 +391,15 @@ public class AssetStation {
         texture.dispose();
     }
 
+
+    public static void setHighScore(int val) {
+        if(getHighScore()<val) {
+            topHighScore.putInteger("highScore", val);
+            topHighScore.flush();
+        }
+    }
+
+    public static int getHighScore() {
+        return topHighScore.getInteger("highScore");
+    }
 }

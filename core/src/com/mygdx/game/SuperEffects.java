@@ -21,13 +21,15 @@ public class SuperEffects {
     private Rectangle superEffectCoinRect;
     private float delay=2;
 
+    private float regenerate=100;
+
 
 
     public SuperEffects(){
 
 
-        superEffectType="coinThrow";
-        Pos=new Vector2(600-AssetStation.coin.getRegionWidth()/2,(1900/2)-AssetStation.coin.getRegionHeight()/2);
+        superEffectType="none";
+        Pos=new Vector2(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
         Velocity=new Vector2(0,0);
 
         playerThrewCoin=false;
@@ -38,6 +40,16 @@ public class SuperEffects {
 
 
     public void update(float delta){
+
+
+        regenerate=regenerate-delta;
+
+        if(regenerate<0 && superEffectType.equals("none")){
+
+            initializeSuperEffectType("coinThrow");
+
+        }
+
 
         if(superEffectType.equals("coinThrow")){
 
@@ -67,8 +79,11 @@ public class SuperEffects {
 
                     }
 
-                    if(Math.round(Velocity.x)==0){
+                    if(Math.round(Velocity.x)==0 && Math.round(Velocity.y)==0){
                         superEffectType="none";
+                        playerThrewCoin=false;
+                        regenerate=200;
+                        Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
 
                     }
 
@@ -77,7 +92,7 @@ public class SuperEffects {
 
          //   }
                 Pos.add(Velocity.cpy().scl(delta));
-            superEffectCoinRect.set(Pos.x, Pos.y, Pos.x + AssetStation.coin.getRegionWidth(), Pos.y + AssetStation.coin.getRegionHeight());
+            superEffectCoinRect.set(Pos.x, Pos.y, Pos.x + AssetStation.coinLarge.getRegionWidth(), Pos.y + AssetStation.coinLarge.getRegionHeight());
 
 
 
@@ -99,16 +114,10 @@ public class SuperEffects {
 
 
 
-    public void initializeSuperEffectType(){
+    public void initializeSuperEffectType(String newSuperEffect){
 
 
-        if(superEffectType.equals("coinThrow")){
-
-
-
-
-
-        }
+        superEffectType=newSuperEffect;
 
 
     }
@@ -118,7 +127,7 @@ public class SuperEffects {
 
     public void checkBounce(){
 
-        if(Pos.x+AssetStation.coin.getRegionWidth()>1200){
+        if(Pos.x+AssetStation.coinLarge.getRegionWidth()>1200){
 
             Velocity.x=-Velocity.x;
 
@@ -130,7 +139,7 @@ public class SuperEffects {
 
 
 
-        if(Pos.y+AssetStation.coin.getRegionHeight()>1900){
+        if(Pos.y+AssetStation.coinLarge.getRegionHeight()>1900){
 
             Velocity.y=-Velocity.y;
         }else if(Pos.y<0){

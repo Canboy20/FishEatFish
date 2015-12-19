@@ -51,6 +51,11 @@ public class PlayerFish {
 
     private float rotation=0;
 
+    private float decreaser=100;
+
+
+
+
 
 
 
@@ -150,6 +155,8 @@ public class PlayerFish {
 
 
 
+
+
         }else if(currentFish.equals("large")){
 
 
@@ -182,9 +189,9 @@ public class PlayerFish {
             position.add(velocity.cpy().scl(delta));
 
             if (position.x + currentFishWidth > 1200) {
-                velocity.x = -50;
+                velocity.x = -100;
             } else if (position.x < 0) {
-                velocity.x = 50;
+                velocity.x = 100;
             }
         }
 
@@ -207,7 +214,7 @@ public class PlayerFish {
 
         //HP update
         if(fishStomach.size()==0) {
-            healthHP = healthHP + 4*Gdx.graphics.getDeltaTime();
+           // healthHP = healthHP + 2*Gdx.graphics.getDeltaTime();
 
             if (healthHP > 100) {
                 healthHP = 100;
@@ -221,12 +228,12 @@ public class PlayerFish {
 
             }else if(fishStomach.size()==2){
 
-                healthHP = healthHP - 2* Gdx.graphics.getDeltaTime();
+                healthHP = healthHP - 1.25f* Gdx.graphics.getDeltaTime();
 
 
             }else if(fishStomach.size()==3){
 
-                healthHP = healthHP - 3* Gdx.graphics.getDeltaTime();
+                healthHP = healthHP - 1.5f* Gdx.graphics.getDeltaTime();
 
 
             }
@@ -236,7 +243,9 @@ public class PlayerFish {
 
         if(healthHP<0){
             //GameOver
-            gmw.changeState("MainScreen");
+
+            AssetStation.setHighScore(pointGainedFromCoinCollect);
+            gmw.changeState("GameOver");
             healthHP=100;
 
         }
@@ -248,6 +257,8 @@ public class PlayerFish {
         if(rotation>360){
             //rotation=0;
         }
+
+        healthHP = healthHP - 1.5f*Gdx.graphics.getDeltaTime();
 
     }
 
@@ -275,7 +286,7 @@ public class PlayerFish {
 
 
     public void onClick() {
-        velocity.y = -300;
+        velocity.y = -300*muliplier;
     }
 
     public float getX() {
@@ -421,7 +432,9 @@ public class PlayerFish {
        if(currentFish.equals("small")){
 
 
-           GameWorld.updateGameState("MainScreen");
+           AssetStation.setHighScore(pointGainedFromCoinCollect);
+           GameWorld.updateGameState("GameOver");
+
 
 
 
@@ -430,6 +443,8 @@ public class PlayerFish {
            currentFish = popLastEatenFish();
            destroyFish("medium");
            updateAllValuesOfNewPlayerFishSpikePuffer(currentFish);
+           increasePointsGained();
+
 
 
 
@@ -439,12 +454,16 @@ public class PlayerFish {
            currentFish = popLastEatenFish();
            destroyFish("large");
            updateAllValuesOfNewPlayerFishSpikePuffer(currentFish);
+           increasePointsGained();
+
 
        }else if(currentFish.equals("xlarge")){
 
            currentFish = popLastEatenFish();
            destroyFish("xlarge");
            updateAllValuesOfNewPlayerFishSpikePuffer(currentFish);
+           increasePointsGained();
+
 
 
        }
@@ -496,7 +515,7 @@ public class PlayerFish {
 
             currentFish = "xlarge";
 
-            velocity.x = 50;
+            velocity.x = 100;
             acceleration.y = 460;
 
             currentFishWidth = AssetStation.xLargeFish.getRegionWidth();
@@ -558,7 +577,7 @@ public class PlayerFish {
 
             currentFish="xlarge";
 
-            velocity.x=50;
+            velocity.x=100;
             acceleration.y=460;
 
             currentFishWidth=AssetStation.xLargeFish.getRegionWidth();
@@ -715,7 +734,7 @@ public class PlayerFish {
 
     public void increaseHealthHP(){
 
-        healthHP=healthHP+30;
+        healthHP=healthHP+20;
 
 
 

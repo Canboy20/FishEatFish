@@ -19,6 +19,9 @@ public class GameWorld {
 
     private static String gameState;
 
+
+
+
     public GameWorld(int midPointY) {
 
 
@@ -38,7 +41,10 @@ public class GameWorld {
 
     public void update(float delta) {
 
-        if(gameState.equals("MainScreen")){
+        if(gameState.equals("MainScreen")) {
+
+
+        }else if(gameState.equals("GameOver")){
 
 
 
@@ -162,6 +168,7 @@ public class GameWorld {
                     if(superEffects.getSuperEffectCoinRect().overlaps(xLargeFish.getXLargeFishRectangle(i))){
                         xLargeFish.deleteXLargeFish(i);
                         playerFish.increasePointsGained();
+                        AssetStation.coinPickUp.play();
                     }
 
                 }
@@ -171,6 +178,8 @@ public class GameWorld {
                     if (superEffects.getSuperEffectCoinRect().overlaps(largeFish.getLargeFishRectangle(i))) {
                         largeFish.deleteLargeFish(i);
                         playerFish.increasePointsGained();
+                        AssetStation.coinPickUp.play();
+
 
                     }
                 }
@@ -242,6 +251,24 @@ public class GameWorld {
 
                     playerFish.updateStateOfFishBySpikeOrPufferFish();
                     spike.spikeHasBeenUsed();
+                    playerFish.increaseHealthHP();
+
+
+
+                }
+            }
+
+
+
+
+            if (spike.isSpikeAvailable2() == true) {
+                if (spike.getSpikeRect2().overlaps(playerFish.getPlayerFishRectangle())) {
+
+
+                    playerFish.updateStateOfFishBySpikeOrPufferFish();
+                    spike.spikeHasBeenUsed2();
+                    playerFish.increaseHealthHP();
+
 
 
                 }
@@ -261,6 +288,13 @@ public class GameWorld {
 
 
     public static void updateGameState(String newState){
+
+        if(newState.equals("GameOver")) {
+            if (AssetStation.gameMusic.isPlaying() == true) {
+                AssetStation.gameMusic.stop();
+            }
+        }
+
 
         gameState=newState;
     }
@@ -327,6 +361,10 @@ public class GameWorld {
         if(newState.equals("PlayingGame")){
             AssetStation.gameMusic.play();
 
+        }else if(newState.equals("GameOver")){
+            if(AssetStation.gameMusic.isPlaying()==true) {
+                AssetStation.gameMusic.stop();
+            }
         }
 
         gameState=newState;

@@ -32,6 +32,9 @@ public class GameRenderer {
 
     float ssssssss=600 -AssetStation.coin.getRegionWidth()/2;
 
+    float dirtGreenCountXLarge=5;
+    float dirtGreenCountLarge=2;
+
 
 
 
@@ -65,26 +68,36 @@ public class GameRenderer {
 
     public void render(float runTime) {
 
-        if(myWorld.getGameState().equals("MainScreen")){
+        if(myWorld.getGameState().equals("MainScreen")) {
 
             batcher.begin();
-            // Disable transparency
-            // This is good for performance when drawing images that do not require
-            // transparency.
             batcher.disableBlending();
-
-
-
-            batcher.draw(AssetStation.mainscreenbackgroundPlay, 0,0, 1200, 1900);
-
-
+            batcher.draw(AssetStation.mainscreenbackgroundPlay, 0, 0, 1200, 1900);
             batcher.end();
+
+
+        }else if(myWorld.getGameState().equals("GameOver")){
+
+
+            batcher.begin();
+            batcher.disableBlending();
+            batcher.draw(AssetStation.gameoverBackground, 0, 0, 1200, 1900);
+            batcher.end();
+
+            batcher2.begin();
+
+            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 570 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
+                    , gameHeight / 2 + 125 / 2);
+
+
+            AssetStation.font.draw(batcher2, Integer.toString(AssetStation.getHighScore()), 570 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
+                    , gameHeight / 4 + 125 / 2);
+
+            batcher2.end();
 
 
 
         }else if(myWorld.getGameState().equals("PlayingGame")) {
-
-
 
 
             // We will move these outside of the loop for performance later.
@@ -113,20 +126,12 @@ public class GameRenderer {
             shapeRenderer.end();
 
 
-
-
-
             // Begin SpriteBatch
             batcher.begin();
             // Disable transparency
             // This is good for performance when drawing images that do not require
             // transparency.
             batcher.disableBlending();
-
-
-
-
-
 
 
             // The bird needs transparency, so we enable that again.
@@ -136,10 +141,8 @@ public class GameRenderer {
                     0, 1200, 1900);
 
 
-
             //Draw health points
             drawHPTriangles();
-
 
 
             if (myWorld.getSpike().isSpikeAvailable() == true) {
@@ -147,9 +150,22 @@ public class GameRenderer {
 
                 batcher.draw(AssetStation.spikes, myWorld.getSpike().getSpikeRect().getX(),
                         myWorld.getSpike().getSpikeRect().getY(), myWorld.getSpike().getSpikeRect().getWidth(), myWorld.getSpike().getSpikeRect().getHeight());
-
-
             }
+
+            if (myWorld.getSpike().isSpikeAvailable2() == true) {
+
+
+                batcher.draw(AssetStation.spikes, myWorld.getSpike().getSpikeRect2().getX(),
+                        myWorld.getSpike().getSpikeRect2().getY(), myWorld.getSpike().getSpikeRect2().getWidth(), myWorld.getSpike().getSpikeRect2().getHeight());
+            }
+
+
+
+//TEST!!!!
+             /*   batcher.draw(AssetStation.spikes, myWorld.getSpike().getSpikeRect().getX(),
+                        myWorld.getSpike().getSpikeRect().getY()-700, myWorld.getSpike().getSpikeRect().getWidth(), myWorld.getSpike().getSpikeRect().getHeight());
+
+            }*/
 
 
             batcher.end();
@@ -179,7 +195,7 @@ public class GameRenderer {
             batcher2.begin();
 
 
-            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()) , 570 -(((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) -1) *50)
+            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 570 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
                     , gameHeight / 2 + 125 / 2);
             batcher2.end();
 
@@ -189,15 +205,49 @@ public class GameRenderer {
 
             for (int cur = 0; cur < myWorld.getxLargeFish().getNumberOfXLargeFish(); cur++) {
 
+                dirtGreenCountXLarge = dirtGreenCountXLarge - Gdx.graphics.getDeltaTime();
+
+
                 if (myWorld.getxLargeFish().getVelocityX(cur) > 0) {
+
+                    if(dirtGreenCountXLarge<0){
+                        batcher.draw(AssetStation.greenDirt,
+                                myWorld.getxLargeFish().getXLargeFishRectangle(cur).getX() - 5 * AssetStation.greenDirt.getRegionWidth() / 10,
+                                myWorld.getxLargeFish().getXLargeFishRectangle(cur).getY() + AssetStation.greenDirt.getRegionHeight() / 5,
+                                AssetStation.greenDirt.getRegionWidth(), AssetStation.greenDirt.getRegionHeight());
+
+                        if(dirtGreenCountXLarge<-0.5f){
+                            dirtGreenCountXLarge=7;
+                        }
+
+                    }
 
                     batcher.draw(AssetStation.xLargeFishAnimation.getKeyFrame(runTime),
                             myWorld.getxLargeFish().getXLargeFishRectangle(cur).getX(), myWorld.getxLargeFish().getXLargeFishRectangle(cur).getY(), myWorld.getxLargeFish().getXLargeFishRectangle(cur).getWidth(), myWorld.getxLargeFish().getXLargeFishRectangle(cur).getHeight());
 
+
+
                 } else {
+
+                    if(dirtGreenCountXLarge<0){
+                        batcher.draw(AssetStation.greenDirt,
+                                myWorld.getxLargeFish().getXLargeFishRectangle(cur).getX() +2* AssetStation.greenDirt.getRegionWidth(),
+                                myWorld.getxLargeFish().getXLargeFishRectangle(cur).getY() + AssetStation.greenDirt.getRegionHeight() / 5,
+                                -AssetStation.greenDirt.getRegionWidth(), AssetStation.greenDirt.getRegionHeight());
+
+                        if(dirtGreenCountXLarge<-0.5f){
+                            dirtGreenCountXLarge=7;
+                        }
+
+                    }
 
                     batcher.draw(AssetStation.xLargeFishAnimation.getKeyFrame(runTime), myWorld.getxLargeFish().getXLargeFishRectangle(cur).getX() + myWorld.getxLargeFish().getXLargeFishRectangle(cur).getWidth(),
                             myWorld.getxLargeFish().getXLargeFishRectangle(cur).getY(), -myWorld.getxLargeFish().getXLargeFishRectangle(cur).getWidth(), myWorld.getxLargeFish().getXLargeFishRectangle(cur).getHeight());
+
+
+
+
+
 
 
                 }
@@ -207,11 +257,44 @@ public class GameRenderer {
 
             for (int cur = 0; cur < myWorld.getLargeFish().getNumberOfLargeFish(); cur++) {
 
+                dirtGreenCountLarge = dirtGreenCountLarge - Gdx.graphics.getDeltaTime();
+
+
                 if (myWorld.getLargeFish().getVelocityX(cur) > 0) {
+
+                    if(dirtGreenCountLarge<0){
+                        batcher.draw(AssetStation.greenDirt,
+                                myWorld.getLargeFish().getLargeFishRectangle(cur).getX() - 4 * AssetStation.greenDirt.getRegionWidth() / 10,
+                                myWorld.getLargeFish().getLargeFishRectangle(cur).getY() ,
+                                AssetStation.greenDirt.getRegionWidth(), AssetStation.greenDirt.getRegionHeight());
+
+                        if(dirtGreenCountLarge<-0.5f){
+                            dirtGreenCountLarge=4;
+                        }
+
+                    }
+
+
+
+
                     batcher.draw(AssetStation.largeFishAnimation.getKeyFrame(runTime),
                             myWorld.getLargeFish().getLargeFishRectangle(cur).getX(), myWorld.getLargeFish().getLargeFishRectangle(cur).getY(),
                             myWorld.getLargeFish().getLargeFishRectangle(cur).getWidth(), myWorld.getLargeFish().getLargeFishRectangle(cur).getHeight());
                 } else {
+
+
+                    if(dirtGreenCountLarge<0){
+                        batcher.draw(AssetStation.greenDirt,
+                                myWorld.getLargeFish().getLargeFishRectangle(cur).getX() ,
+                                myWorld.getLargeFish().getLargeFishRectangle(cur).getY() + AssetStation.greenDirt.getRegionHeight() / 5,
+                                AssetStation.greenDirt.getRegionWidth(), AssetStation.greenDirt.getRegionHeight());
+
+                        if(dirtGreenCountLarge<-0.5f){
+                            dirtGreenCountLarge=4;
+                        }
+
+                    }
+
 
                     batcher.draw(AssetStation.largeFishAnimation.getKeyFrame(runTime),
                             myWorld.getLargeFish().getLargeFishRectangle(cur).getX() + myWorld.getLargeFish().getLargeFishRectangle(cur).getWidth(),
@@ -219,11 +302,8 @@ public class GameRenderer {
                             -myWorld.getLargeFish().getLargeFishRectangle(cur).getWidth(), myWorld.getLargeFish().getLargeFishRectangle(cur).getHeight());
 
 
-
                 }
             }
-
-
 
 
             for (int cur = 0; cur < myWorld.getMediumFish().getNumberOfMediumFish(); cur++) {
@@ -246,19 +326,21 @@ public class GameRenderer {
 
             //TESTING ONLY
 
+            if(!myWorld.getSuperEffects().getTypeOfSuperEffect().equals("none")){
 
+                batcher.draw(AssetStation.coinLarge,
+                        myWorld.getSuperEffects().getxPos(), myWorld.getSuperEffects().getyPos(),
+                        AssetStation.coinLarge.getRegionWidth(), AssetStation.coinLarge.getRegionHeight());
 
-            batcher.draw(AssetStation.coin,
-                    myWorld.getSuperEffects().getxPos(), myWorld.getSuperEffects().getyPos(),
-                    AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
+            }
 
 
 
 
             //FishProtection
-            if(myWorld.getPlayerFish().isPlayerFishProtected()==true){
+            if (myWorld.getPlayerFish().isPlayerFishProtected() == true) {
 
-                if(myWorld.getPlayerFish().getXVelocityOfPlayerFish()>0) {
+                if (myWorld.getPlayerFish().getXVelocityOfPlayerFish() > 0) {
 /*
                     batcher.draw(AssetStation.spikesProtection,
                             ((myWorld.getPlayerFish().getX() + bird.getWidth()) - AssetStation.spikesProtection.getRegionWidth())+AssetStation.spikesProtection.getRegionWidth()/8, myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
@@ -267,11 +349,11 @@ public class GameRenderer {
 
 
                     batcher.draw(AssetStation.spikesProtection,
-                            ((myWorld.getPlayerFish().getX() + bird.getWidth()) - AssetStation.spikesProtection.getRegionWidth())+AssetStation.spikesProtection.getRegionWidth()/8, myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
+                            ((myWorld.getPlayerFish().getX() + bird.getWidth()) - AssetStation.spikesProtection.getRegionWidth()) + AssetStation.spikesProtection.getRegionWidth() / 8, myWorld.getPlayerFish().getY() - myWorld.getPlayerFish().getHeight() / 8,
 
                             AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight());
 
-                }else{
+                } else {
 /*
                     batcher.draw(AssetStation.spikesProtection,
                             myWorld.getPlayerFish().getX() - AssetStation.spikesProtection.getRegionWidth()/8  ,myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
@@ -280,16 +362,13 @@ public class GameRenderer {
                             */
 
                     batcher.draw(AssetStation.spikesProtection,
-                            myWorld.getPlayerFish().getX() - AssetStation.spikesProtection.getRegionWidth()/8  ,myWorld.getPlayerFish().getY()-myWorld.getPlayerFish().getHeight()/8,
+                            myWorld.getPlayerFish().getX() - AssetStation.spikesProtection.getRegionWidth() / 8, myWorld.getPlayerFish().getY() - myWorld.getPlayerFish().getHeight() / 8,
                             AssetStation.spikesProtection.getRegionWidth(), AssetStation.spikesProtection.getRegionHeight());
 
 
                 }
 
             }
-
-
-
 
 
             if (myWorld.getPlayerFish().getTypeOfPlayerFish().equals("small")) {
@@ -307,11 +386,10 @@ public class GameRenderer {
                 }
 
 
-
             } else if (myWorld.getPlayerFish().getTypeOfPlayerFish().equals("medium")) {
 
 
-                if (myWorld.getPlayerFish().getXVelocityOfPlayerFish()> 0) {
+                if (myWorld.getPlayerFish().getXVelocityOfPlayerFish() > 0) {
                     batcher.draw(AssetStation.mediumFishAnimation.getKeyFrame(runTime),
                             bird.getX(), bird.getY(), bird.getWidth(), bird.getHeight());
                 } else {
@@ -320,14 +398,10 @@ public class GameRenderer {
                 }
 
 
-
-
-
-
             } else if (myWorld.getPlayerFish().getTypeOfPlayerFish().equals("large")) {
 
 
-                if (myWorld.getPlayerFish().getXVelocityOfPlayerFish()> 0) {
+                if (myWorld.getPlayerFish().getXVelocityOfPlayerFish() > 0) {
                     batcher.draw(AssetStation.largeFishAnimation.getKeyFrame(runTime),
                             bird.getX(), bird.getY(), bird.getWidth(), bird.getHeight());
                 } else {
@@ -349,19 +423,12 @@ public class GameRenderer {
             }
 
 
-
-
-
-
-
-
-
             //DEAD FISHES EXPLOSION
 
-            if(myWorld.getPlayerFish().isFishBeingDestroyed()==true) {
+            if (myWorld.getPlayerFish().isFishBeingDestroyed() == true) {
 
 
-                if(myWorld.getPlayerFish().getdeadFishType().equals("medium")) {
+                if (myWorld.getPlayerFish().getdeadFishType().equals("medium")) {
 
                     if (myWorld.getPlayerFish().getDeadFishCount() <= 12) {
 
@@ -408,12 +475,7 @@ public class GameRenderer {
                     }
 
 
-
-
-
-
-
-            }else if(myWorld.getPlayerFish().getdeadFishType().equals("large")) {
+                } else if (myWorld.getPlayerFish().getdeadFishType().equals("large")) {
 
                     if (myWorld.getPlayerFish().getDeadFishCount() <= 12) {
 
@@ -460,7 +522,7 @@ public class GameRenderer {
                     }
 
 
-                }else if(myWorld.getPlayerFish().getdeadFishType().equals("xlarge")){
+                } else if (myWorld.getPlayerFish().getdeadFishType().equals("xlarge")) {
 
                     if (myWorld.getPlayerFish().getDeadFishCount() <= 10) {
 
@@ -506,7 +568,6 @@ public class GameRenderer {
                     }
 
 
-
                 }
                 /*
                     batcher.draw(AssetStation.largeFishDeadAnimation.getKeyFrame(runTime),
@@ -517,60 +578,43 @@ public class GameRenderer {
             }
 
 
-
-
-
-
-
-
-
-            if(myWorld.getPufferFish().isPufferFishIsAvailable()==true) {
+            if (myWorld.getPufferFish().isPufferFishIsAvailable() == true) {
 
 
                 //Will draw alert at first
 
-                if(myWorld.getPufferFish().isPufferFishAlertBeingDisplayed()==true){
+                if (myWorld.getPufferFish().isPufferFishAlertBeingDisplayed() == true) {
 
-                    if(myWorld.getPufferFish().getY()<gameHeight/2){
+                    if (myWorld.getPufferFish().getY() < gameHeight / 2) {
 
-                        if(myWorld.getPufferFish().getX()<600) {
+                        if (myWorld.getPufferFish().getX() < 600) {
                             batcher.draw(AssetStation.pufferAlertTop,
                                     0, myWorld.getPufferFish().getPufferFishRectangle().getY(),
                                     AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
-                        }else{
+                        } else {
                             batcher.draw(AssetStation.pufferAlertTop,
-                                    1200-AssetStation.pufferAlertTop.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                    1200 - AssetStation.pufferAlertTop.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
                                     AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
                         }
 
 
+                    } else if (myWorld.getPufferFish().getY() > gameHeight / 2) {
 
-
-                    }else if(myWorld.getPufferFish().getY()>gameHeight/2){
-
-                        if(myWorld.getPufferFish().getX()<600) {
+                        if (myWorld.getPufferFish().getX() < 600) {
                             batcher.draw(AssetStation.pufferAlertBottom,
-                                    0, myWorld.getPufferFish().getPufferFishRectangle().getY()-AssetStation.pufferAlertTop.getRegionHeight(),
+                                    0, myWorld.getPufferFish().getPufferFishRectangle().getY() - AssetStation.pufferAlertTop.getRegionHeight(),
                                     AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
-                        }else{
+                        } else {
                             batcher.draw(AssetStation.pufferAlertBottom,
-                                    1200-AssetStation.pufferAlertTop.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY()-AssetStation.pufferAlertTop.getRegionHeight(),
+                                    1200 - AssetStation.pufferAlertTop.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY() - AssetStation.pufferAlertTop.getRegionHeight(),
                                     AssetStation.pufferAlertTop.getRegionWidth(), AssetStation.pufferAlertTop.getRegionHeight());
                         }
-
-
 
 
                     }
 
 
-
-
-
-
-
-
-                }else {
+                } else {
 
 
                     if (myWorld.getPufferFish().getVelocityX() > 0) {
@@ -589,30 +633,24 @@ public class GameRenderer {
                 }
 
 
-
-
-
-
-
-
             }
 
 
-            if(myWorld.getCoin().isCoinAvailabke()==true) {
+            if (myWorld.getCoin().isCoinAvailabke() == true) {
 
-                if(myWorld.getCoin().getCoinType().equals("coin")) {
+                if (myWorld.getCoin().getCoinType().equals("coin")) {
 
                     batcher.draw(AssetStation.coin,
                             myWorld.getCoin().getCoinRect().getX(), myWorld.getCoin().getCoinRect().getY(),
                             AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
-                }else if(myWorld.getCoin().getCoinType().equals("health")){
+                } else if (myWorld.getCoin().getCoinType().equals("health")) {
 
                     batcher.draw(AssetStation.coinHealth,
-                    myWorld.getCoin().getCoinRect().getX(), myWorld.getCoin().getCoinRect().getY(),
+                            myWorld.getCoin().getCoinRect().getX(), myWorld.getCoin().getCoinRect().getY(),
                             AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
-                }else if(myWorld.getCoin().getCoinType().equals("spikesprotection")){
+                } else if (myWorld.getCoin().getCoinType().equals("spikesprotection")) {
 
 
                     batcher.draw(AssetStation.coinSpikes,
@@ -624,42 +662,41 @@ public class GameRenderer {
             }
 
 
-            if(myWorld.getCoin().isCoinAvailabke2()==true) {
+            if (myWorld.getCoin().isCoinAvailabke2() == true) {
 
-                if(myWorld.getCoin().getCoin2Type().equals("coin")) {
+                if (myWorld.getCoin().getCoin2Type().equals("coin")) {
                     batcher.draw(AssetStation.coin,
                             myWorld.getCoin().getCoinRect2().getX(), myWorld.getCoin().getCoinRect2().getY(),
                             AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
 
-                }else if(myWorld.getCoin().getCoin2Type().equals("health")){
+                } else if (myWorld.getCoin().getCoin2Type().equals("health")) {
                     batcher.draw(AssetStation.coinHealth,
                             myWorld.getCoin().getCoinRect2().getX(), myWorld.getCoin().getCoinRect2().getY(),
                             AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
-                }else if(myWorld.getCoin().getCoin2Type().equals("spikesprotection")){
+                } else if (myWorld.getCoin().getCoin2Type().equals("spikesprotection")) {
 
 
-                batcher.draw(AssetStation.coinSpikes,
-                        myWorld.getCoin().getCoinRect2().getX(), myWorld.getCoin().getCoinRect2().getY(),
-                        AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
+                    batcher.draw(AssetStation.coinSpikes,
+                            myWorld.getCoin().getCoinRect2().getX(), myWorld.getCoin().getCoinRect2().getY(),
+                            AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
                 }
             }
 
 
+            if (myWorld.getJaws().isJawsVisible() == true) {
 
-            if(myWorld.getJaws().isJawsVisible()==true) {
-
-                if(myWorld.getJaws().isShadowStillDisplayed()==true){
+                if (myWorld.getJaws().isShadowStillDisplayed() == true) {
 
 
-                    if(myWorld.getJaws().jawsIsAtBottomOrTop().equals("Top")) {
+                    if (myWorld.getJaws().jawsIsAtBottomOrTop().equals("Top")) {
                         batcher.draw(AssetStation.jawsShadow,
                                 0, -100,
                                 1200, 920);
 
-                    }else if(myWorld.getJaws().jawsIsAtBottomOrTop().equals("Bottom")){
+                    } else if (myWorld.getJaws().jawsIsAtBottomOrTop().equals("Bottom")) {
 
                         batcher.draw(AssetStation.jawsShadow,
                                 0, 1900,
@@ -669,17 +706,14 @@ public class GameRenderer {
                     }
 
 
+                } else {
 
-
-
-                }else {
-
-                    if(myWorld.getJaws().jawsIsAtBottomOrTop().equals("Top")) {
+                    if (myWorld.getJaws().jawsIsAtBottomOrTop().equals("Top")) {
                         batcher.draw(AssetStation.jaws,
                                 0, -100,
                                 1200, 920);
 
-                    }else if(myWorld.getJaws().jawsIsAtBottomOrTop().equals("Bottom")){
+                    } else if (myWorld.getJaws().jawsIsAtBottomOrTop().equals("Bottom")) {
 
                         batcher.draw(AssetStation.jaws,
                                 0, 1900,
@@ -695,9 +729,43 @@ public class GameRenderer {
             }
 
 
-
             // End SpriteBatch
             batcher.end();
+
+
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+            if(myWorld.getPlayerFish().getHealthHP()<16){
+                shapeRenderer.setColor(new Color(0, 1, 0, 0.3f));
+
+
+            }else  if(myWorld.getPlayerFish().getHealthHP()<28){
+                shapeRenderer.setColor(new Color(0, 1, 0, 0.25f));
+
+
+            }else if(myWorld.getPlayerFish().getHealthHP()<40){
+
+           shapeRenderer.setColor(new Color(0, 1, 0, 0.2f));
+
+       }else if(myWorld.getPlayerFish().getHealthHP()<52){
+            shapeRenderer.setColor(new Color(0, 1, 0, 0.15f));
+
+
+        }else if(myWorld.getPlayerFish().getHealthHP()<64){
+
+                shapeRenderer.setColor(new Color(0, 1, 0, 0.1f));
+
+            }else if(myWorld.getPlayerFish().getHealthHP()<76) {
+                shapeRenderer.setColor(new Color(0, 1, 0, 0.05f));
+            }else{
+                shapeRenderer.setColor(new Color(0, 1, 0, 0.0f));
+
+            }
+                shapeRenderer.rect(0, 0, 1200, 1900);
+            shapeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
 
 
         }
