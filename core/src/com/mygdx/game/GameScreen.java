@@ -27,7 +27,7 @@ public class GameScreen implements Screen {
         world = new GameWorld(midPointY);
         renderer = new GameRenderer(world, (int) gameHeight, midPointY);
 
-        Gdx.input.setInputProcessor(new InputHandler(world.getPlayerFish(),world.getSuperEffects()));
+        Gdx.input.setInputProcessor(new InputHandler(world,world.getSuperEffects()));
 
     }
 
@@ -56,7 +56,9 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
 
-        world.changeState("paused");
+        if(world.getGameState().equals("PlayingGame")) {
+            world.changeState("paused");
+        }
 
         System.out.println("GameScreen - pause called");
     }

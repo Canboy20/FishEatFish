@@ -250,5 +250,20 @@ public class SuperEffects {
         playerPickedUpJet=true;
     }
 
+    public void resetSuperPowers(){
+
+
+        delay=2;
+        jetDuration=15;
+        regenerate=5;
+        superEffectType="none";
+        Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
+        Velocity.set(0,0);
+        playerThrewCoin=false;
+        playerPickedUpJet=false;
+        superEffectCoinRect.set(0,0,0,0);
+
+        }
+
 
 }

@@ -174,4 +174,20 @@ public class Spike {
 
 
 
+    public void resetSpike(){
+
+
+        isAvailable=false;
+        isAvailable2=false;
+        timeToReappear=5;
+        timeToReappear2=12;
+        spikeRect.set(0,0,0,0);
+        spikeRect2.set(0,0,0,0);
+        randomRectangleArea.set(0,0,0,0);
+        randomRectangleArea2.set(0,0,0,0);
+
+
+    }
+
+
 }

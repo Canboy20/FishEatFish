@@ -186,9 +186,24 @@ public class XLargeFish {
 
         }
 
-
-
-
     }
+
+
+    public void resetXLargeFish(){
+
+
+        positionXLargeFish.clear();
+        velocityXLargeFish.clear();
+        rectangleXLargeFish.clear();
+        timeLeftForNewFish=3;
+        isVisible=true;
+        decreaser=0;
+        positionXLargeFish.add(new Vector2(0,0));
+        velocityXLargeFish.add(new Vector2(100, decreaser));
+        rectangleXLargeFish.add(new Rectangle(0, 0, width, height));
+
+
+        }
+
 
 }

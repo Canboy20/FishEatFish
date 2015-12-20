@@ -218,5 +218,21 @@ public class PufferFish {
 
     }
 
+
+
+
+    public void resetPufferFish(){
+
+        pufferFishIsAvailable=false;
+        pufferFishAlertIsDisplayed=false;
+        timeLeftForNewFish=17;
+        pufferFishAlert=3;
+        isVisible=true;
+        positionPufferFish.set(0,0);
+        velocityPufferFish.set(300,300);
+        rectanglePufferFish.set(0,0,width,height);
+
+  }
+
 }
 

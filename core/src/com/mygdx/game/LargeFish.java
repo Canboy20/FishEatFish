@@ -202,4 +202,28 @@ public class LargeFish {
 
     }
 
+
+    public void resetLargeFish(){
+
+        positionLargeFish.clear();
+        velocityLargeFish.clear();
+        rectangleLargeFish.clear();
+
+        timeLeftForNewFish=3;
+
+        isVisible=true;
+      decreaser=0;
+
+
+
+
+            positionLargeFish.add(new Vector2(0, 0));
+
+            velocityLargeFish.add(new Vector2(200, decreaser));
+
+            rectangleLargeFish.add(new Rectangle(0, 0, width, height));
+
+
+        }
+
 }

@@ -293,5 +293,28 @@ public class Coin {
     }
 
 
+    public void resetCoin(){
+
+
+        timeToReappear=3;
+        timeToReappear2=5;
+
+        coinIsAvailabke=false;
+        coinIsAvailabke2=false;
+
+         coinType="none";
+        coin2Type="none";
+
+
+            positionCoin.set(0,0);
+            velocityCoin.set(190,200);
+            coinRect.set(0,0,0,0);
+
+            positionCoin2.set(0,0);
+            velocityCoin2.set(190,200);
+            coinRect2.set(0,0,0,0);
+    }
+
+
 
 }

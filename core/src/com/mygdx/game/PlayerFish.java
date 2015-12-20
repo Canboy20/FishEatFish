@@ -763,6 +763,31 @@ public class PlayerFish {
         muliplier=1;
     }
 
+
+
+
+    public  void resetPlayerFish(){
+
+        currentFish="small";
+        deadFishFrameCount=0;
+        pointGainedFromCoinCollect=0;
+        healthHP=100;
+        muliplier=1;
+        fishDestroyedType="";
+        fishDestroyed=false;
+        protectionDuration=4;
+        rotation=0;
+        decreaser=100;
+        velocity.set(410,0);
+        acceleration.set(0, 460);
+        fishStomach.clear();
+        currentFishWidth=AssetStation.smallFish.getRegionWidth();
+        currentFishHeight=AssetStation.smallFish.getRegionHeight();
+        playerFishRectangle=new Rectangle(0,0,currentFishWidth,currentFishHeight);
+        playerFishIsProtected=false;
+
+    }
+
 }
 
 

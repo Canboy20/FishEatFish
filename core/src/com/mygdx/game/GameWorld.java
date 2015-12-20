@@ -303,6 +303,9 @@ public class GameWorld {
             }
         }
 
+
+
+
         gameState=newState;
     }
 
@@ -367,6 +370,8 @@ public class GameWorld {
     public void changeState(String newState){
 
         if(newState.equals("PlayingGame")){
+
+            resetAllObjects();
             AssetStation.gameMusic.play();
 
         }else if(newState.equals("GameOver")){
@@ -381,6 +386,24 @@ public class GameWorld {
         gameState=newState;
 
     }
+
+
+    public void resetAllObjects(){
+
+        playerFish.resetPlayerFish();
+        mediumFish.resetMediumFish();
+        largeFish.resetLargeFish();
+        xLargeFish.resetXLargeFish();
+        jaws.resetJaws();
+        spike.resetSpike();
+        pufferFish.resetPufferFish();
+        superEffects.resetSuperPowers();
+        coin.resetCoin();
+
+
+    }
+
+
 
 
 }

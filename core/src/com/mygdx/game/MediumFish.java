@@ -198,14 +198,35 @@ public class MediumFish {
             velocityMediumFish.add(new Vector2(-250, decreaser));
             rectangleMediumFish.add(new Rectangle(1200, 14 * AssetStation.largeFish.getRegionHeight(), width, height));
 
+        }
+
+    }
+
+
+    public void resetMediumFish(){
+
+        positionMediumFish.clear();
+        velocityMediumFish.clear();
+        rectangleMediumFish.clear();
+
+        timeLeftForNewFish=3;
+
+        isVisible=true;
+
+        decreaser=0;
+
+
+            positionMediumFish.add(new Vector2(0, 0));
+
+            velocityMediumFish.add(new Vector2(250, decreaser));
+
+            rectangleMediumFish.add(new Rectangle(0, 0, width, height));
+
+
+
 
 
 
         }
-
-
-
-
-    }
 
 }

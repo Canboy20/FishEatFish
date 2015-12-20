@@ -7,7 +7,7 @@ import com.badlogic.gdx.InputProcessor;
  * Created by Can Atay on 11/11/2015.
  */
 public class InputHandler implements InputProcessor {
-    private PlayerFish playerFish;
+    private GameWorld world;
     private SuperEffects superEffects;
 
 
@@ -27,10 +27,11 @@ public class InputHandler implements InputProcessor {
 
 
 
+
     // Ask for a reference to the Bird when InputHandler is created.
-    public InputHandler(PlayerFish bird,SuperEffects superEffects) {
+    public InputHandler(GameWorld world,SuperEffects superEffects) {
         // myBird now represents the gameWorld's bird.
-        playerFish = bird;
+        this.world = world;
         this.superEffects=superEffects;
     }
 
@@ -40,16 +41,25 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        if(GameWorld.getGameState().equals("MainScreen")){
+        if(GameWorld.getGameState().equals("MainScreen")) {
 
-            if(screenX*ratioX>350 && screenX*ratioX<850 && screenY*ratioY>880 && screenY*ratioY<1070){
+            if (screenX * ratioX > 350 && screenX * ratioX < 850 && screenY * ratioY > 880 && screenY * ratioY < 1070) {
 
-                GameWorld.updateGameState("PlayingGame");
+
+
+                world.changeState("PlayingGame");
+                //GameWorld.updateGameState("PlayingGame");
+
+
+            } else if (screenX * ratioX > 974 && screenX * ratioX < 1138 && screenY * ratioY > 1703 && screenY * ratioY < 1862) {
+                Gdx.net.openURI("https://www.facebook.com/irfancan.atay");
 
             }
 
 
+        }else if(GameWorld.getGameState().equals("GameOver")){
 
+            GameWorld.updateGameState("MainScreen");
 
 
         }else if(GameWorld.getGameState().equals("PlayingGame")) {
@@ -67,7 +77,7 @@ public class InputHandler implements InputProcessor {
             }else {
 
 
-                playerFish.onClick();
+                world.getPlayerFish().onClick();
                 situationMiddle=false;
 
             }

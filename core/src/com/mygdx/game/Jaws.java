@@ -151,11 +151,20 @@ public class Jaws {
     }
 
 
+    public void resetJaws(){
 
 
+        timeLeftForJaws=10;
+        shadowDuration=3;
+        jawsDuration=2;
 
 
+            jawsRectangle.set(0,0,0,0);
+            jawsIsVisible=false;
+            jawsShadowIsVisible=false;
+            jawsBottomOrTopIsKnown=false;
 
 
+        }
 
 }
