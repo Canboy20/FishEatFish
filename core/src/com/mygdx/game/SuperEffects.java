@@ -18,10 +18,13 @@ public class SuperEffects {
     private Vector2 Velocity;
 
     private boolean playerThrewCoin;
+    private boolean playerPickedUpJet;
     private Rectangle superEffectCoinRect;
     private float delay=2;
+    private float jetDuration=15;
 
-    private float regenerate=100;
+    private float regenerate=5;
+    private int randomPower;
 
 
 
@@ -33,6 +36,7 @@ public class SuperEffects {
         Velocity=new Vector2(0,0);
 
         playerThrewCoin=false;
+        playerPickedUpJet=false;
         superEffectCoinRect=new Rectangle(0,0,0,0);
 
     }
@@ -46,8 +50,16 @@ public class SuperEffects {
 
         if(regenerate<0 && superEffectType.equals("none")){
 
-            initializeSuperEffectType("coinThrow");
+            randomPower=(int)(Math.random()*2);
 
+            if(randomPower==0) {
+                initializeSuperEffectType("coinThrow");
+
+            }else if(randomPower==1){
+                initializeSuperEffectType("jet");
+            }
+
+            AssetStation.superPowerAppeared.play();
         }
 
 
@@ -82,7 +94,7 @@ public class SuperEffects {
                     if(Math.round(Velocity.x)==0 && Math.round(Velocity.y)==0){
                         superEffectType="none";
                         playerThrewCoin=false;
-                        regenerate=200;
+                        regenerate=100;
                         Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
 
                     }
@@ -102,9 +114,28 @@ public class SuperEffects {
             checkBounce();
 
 
+        }else if(superEffectType.equals("jet")){
+
+
+            if(playerPickedUpJet==false) {
+                superEffectCoinRect.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2,  AssetStation.jetPack1.getRegionWidth(),  AssetStation.jetPack1.getRegionHeight());
+            }else{
+
+                jetDuration=jetDuration-delta;
+                if(jetDuration<0){
+
+                    superEffectType="none";
+                    playerPickedUpJet=false;
+                    jetDuration=15;
+                    regenerate=100;
+                    Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
+
+
+                }
 
 
 
+            }
 
 
         }
@@ -211,11 +242,13 @@ public class SuperEffects {
         return superEffectCoinRect;
     }
 
+    public boolean hasPlayerPickedUpJet(){
+        return playerPickedUpJet;
+    }
 
-
-
-
-
+    public void playerHasPickedUpJet(){
+        playerPickedUpJet=true;
+    }
 
 
 }

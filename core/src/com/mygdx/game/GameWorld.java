@@ -72,7 +72,7 @@ public class GameWorld {
                 for (int cur = 0; cur < xLargeFish.getNumberOfXLargeFish(); cur++) {
                     if (xLargeFish.getXLargeFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
 
-                        if(playerFish.isPlayerFishProtected()==true){
+                        if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                             xLargeFish.deleteXLargeFish(cur);
                             playerFish.increasePointsGained();
@@ -95,7 +95,7 @@ public class GameWorld {
 
                         //playerFish.makeBirdInvisible();
 
-                        if(playerFish.isPlayerFishProtected()==true){
+                        if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                             largeFish.deleteLargeFish(cur);
                             playerFish.increasePointsGained();
@@ -113,7 +113,7 @@ public class GameWorld {
                 if (mediumFish.getMediumFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
 
                     //playerFish.makeBirdInvisible();
-                    if(playerFish.isPlayerFishProtected()==true){
+                    if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                         mediumFish.deleteMediumFish(cur);
                         playerFish.increasePointsGained();
@@ -138,11 +138,11 @@ public class GameWorld {
             }
 
 
-            if(pufferFish.isPufferFishIsAvailable()==true){
+            if(pufferFish.isPufferFishIsAvailable()==true || superEffects.hasPlayerPickedUpJet()==true ){
 
                 if(playerFish.getPlayerFishRectangle().overlaps(pufferFish.getPufferFishRectangle())){
 
-                    if(playerFish.isPlayerFishProtected()==true){
+                    if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                         pufferFish.deletePufferFish();
                         AssetStation.puff.play();
@@ -170,21 +170,35 @@ public class GameWorld {
                         playerFish.increasePointsGained();
                         AssetStation.coinPickUp.play();
                     }
-
                 }
-
 
                 for(int i=0;i<largeFish.getNumberOfLargeFish();i++) {
                     if (superEffects.getSuperEffectCoinRect().overlaps(largeFish.getLargeFishRectangle(i))) {
                         largeFish.deleteLargeFish(i);
                         playerFish.increasePointsGained();
                         AssetStation.coinPickUp.play();
-
-
                     }
                 }
-
             }
+
+
+            if(superEffects.getTypeOfSuperEffect().equals("jet") && superEffects.hasPlayerPickedUpJet()==false && playerFish.getTypeOfPlayerFish().equals("small")){
+
+                if(playerFish.getPlayerFishRectangle().overlaps(superEffects.getSuperEffectCoinRect())){
+
+                    superEffects.playerHasPickedUpJet();
+                    playerFish.increaseMuliplier();
+                    AssetStation.jetsound.play();
+
+
+                }
+            }
+
+
+            if(superEffects.getTypeOfSuperEffect().equals("none")){
+                playerFish.revertToNormalMultiplier();
+            }
+
 
 
 
@@ -214,8 +228,6 @@ public class GameWorld {
             }
 
 
-
-
             if(coin.isCoinAvailabke2()==true){
                 if(playerFish.getPlayerFishRectangle().overlaps(coin.getCoinRect2()) && playerFish.getTypeOfPlayerFish().equals("small")){
 
@@ -243,17 +255,17 @@ public class GameWorld {
 
 
 
-
-
             if (spike.isSpikeAvailable() == true) {
-                if (spike.getSpikeRect().overlaps(playerFish.getPlayerFishRectangle())) {
 
+                if(superEffects.hasPlayerPickedUpJet()==true){
+
+                    spike.spikeHasBeenUsed();
+
+                }else if (spike.getSpikeRect().overlaps(playerFish.getPlayerFishRectangle())) {
 
                     playerFish.updateStateOfFishBySpikeOrPufferFish();
                     spike.spikeHasBeenUsed();
                     playerFish.increaseHealthHP();
-
-
 
                 }
             }
@@ -262,27 +274,23 @@ public class GameWorld {
 
 
             if (spike.isSpikeAvailable2() == true) {
-                if (spike.getSpikeRect2().overlaps(playerFish.getPlayerFishRectangle())) {
+
+                if(superEffects.hasPlayerPickedUpJet()==true){
+
+                    spike.spikeHasBeenUsed2();
+
+                }else if (spike.getSpikeRect2().overlaps(playerFish.getPlayerFishRectangle())) {
 
 
                     playerFish.updateStateOfFishBySpikeOrPufferFish();
                     spike.spikeHasBeenUsed2();
                     playerFish.increaseHealthHP();
 
-
-
                 }
             }
-
-
-
-
-
-
-
         }
-
     }
+
 
 
 
@@ -295,9 +303,9 @@ public class GameWorld {
             }
         }
 
-
         gameState=newState;
     }
+
 
 
     public  static String getGameState(){
@@ -365,6 +373,9 @@ public class GameWorld {
             if(AssetStation.gameMusic.isPlaying()==true) {
                 AssetStation.gameMusic.stop();
             }
+        }else if(newState.equals("Paused")){
+
+
         }
 
         gameState=newState;

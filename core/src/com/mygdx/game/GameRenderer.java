@@ -97,7 +97,7 @@ public class GameRenderer {
 
 
 
-        }else if(myWorld.getGameState().equals("PlayingGame")) {
+        }else if(myWorld.getGameState().equals("PlayingGame") || myWorld.getGameState().equals("paused")) {
 
 
             // We will move these outside of the loop for performance later.
@@ -326,13 +326,29 @@ public class GameRenderer {
 
             //TESTING ONLY
 
-            if(!myWorld.getSuperEffects().getTypeOfSuperEffect().equals("none")){
+            if(myWorld.getSuperEffects().getTypeOfSuperEffect().equals("coinThrow")){
 
                 batcher.draw(AssetStation.coinLarge,
                         myWorld.getSuperEffects().getxPos(), myWorld.getSuperEffects().getyPos(),
                         AssetStation.coinLarge.getRegionWidth(), AssetStation.coinLarge.getRegionHeight());
 
             }
+
+
+            if(myWorld.getSuperEffects().getTypeOfSuperEffect().equals("jet")) {
+
+
+                if (myWorld.getSuperEffects().hasPlayerPickedUpJet() == false) {
+
+                    batcher.draw(AssetStation.jetPackAnimation.getKeyFrame(runTime),
+                            myWorld.getSuperEffects().getxPos()-AssetStation.jetPack1.getRegionWidth()/2, myWorld.getSuperEffects().getyPos(),
+                            AssetStation.jetPack1.getRegionWidth(), AssetStation.jetPack1.getRegionHeight());
+
+
+                }
+            }
+
+
 
 
 
@@ -377,10 +393,31 @@ public class GameRenderer {
                 // Draw bird at its coordinates. Retrieve the Animation object from AssetLoader
                 // Pass in the runTime variable to get the current frame.
 
+
+
                 if (myWorld.getPlayerFish().getXVelocityOfPlayerFish() > 0) {
+
+                    if(myWorld.getSuperEffects().getTypeOfSuperEffect().equals("jet") && myWorld.getSuperEffects().hasPlayerPickedUpJet()==true) {
+
+                        batcher.draw(AssetStation.jetPackAnimation.getKeyFrame(runTime),
+                                bird.getX() - 3 * AssetStation.jetPack1.getRegionWidth() / 7, bird.getY() - 3 * AssetStation.jetPack1.getRegionHeight() / 4,
+                                AssetStation.jetPack1.getRegionWidth(), AssetStation.jetPack2.getRegionHeight());
+                    }
+
                     batcher.draw(AssetStation.smallFishAnimation.getKeyFrame(runTime),
                             bird.getX(), bird.getY(), bird.getWidth(), bird.getHeight());
+
+
+
                 } else {
+
+                    if(myWorld.getSuperEffects().getTypeOfSuperEffect().equals("jet") && myWorld.getSuperEffects().hasPlayerPickedUpJet()==true) {
+
+                        batcher.draw(AssetStation.jetPackAnimation.getKeyFrame(runTime),
+                                bird.getX() + 9 * AssetStation.jetPack1.getRegionWidth() / 8, bird.getY() - 3 * AssetStation.jetPack1.getRegionHeight() / 4,
+                                -AssetStation.jetPack1.getRegionWidth(), AssetStation.jetPack2.getRegionHeight());
+                    }
+
                     batcher.draw(AssetStation.smallFishAnimation.getKeyFrame(runTime),
                             bird.getX() + bird.getWidth(), bird.getY(), -bird.getWidth(), bird.getHeight());
                 }
@@ -729,6 +766,10 @@ public class GameRenderer {
             }
 
 
+
+
+
+
             // End SpriteBatch
             batcher.end();
 
@@ -766,6 +807,13 @@ public class GameRenderer {
                 shapeRenderer.rect(0, 0, 1200, 1900);
             shapeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
+
+
+            if(myWorld.getGameState().equals("paused")) {
+                batcher.begin();
+                batcher.draw(AssetStation.pausedText, 600 - AssetStation.pausedText.getRegionWidth() / 2, 1900 / 5 - AssetStation.pausedText.getRegionHeight() / 2, AssetStation.pausedText.getRegionWidth(), AssetStation.pausedText.getRegionHeight());
+                batcher.end();
+            }
 
 
         }

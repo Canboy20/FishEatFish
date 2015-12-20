@@ -166,6 +166,8 @@ public class InputHandler implements InputProcessor {
 
 
 
+        }else if(GameWorld.getGameState().equals("paused")){
+            GameWorld.updateGameState("PlayingGame");
         }
 
 

@@ -286,7 +286,7 @@ public class PlayerFish {
 
 
     public void onClick() {
-        velocity.y = -300*muliplier;
+        velocity.y = -300;
     }
 
     public float getX() {
@@ -754,7 +754,8 @@ public class PlayerFish {
 
 
     public void increaseMuliplier(){
-        muliplier=3;
+
+        muliplier=2;
     }
 
 

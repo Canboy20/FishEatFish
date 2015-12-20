@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -25,7 +26,7 @@ public class AssetStation {
 
     public static TextureRegion bg, grass;
 
-    public static Sound coinPickUp,healthgained,bite,rip,puff;
+    public static Sound coinPickUp,healthgained,bite,rip,puff,superPowerAppeared,jetsound;
 
 
 
@@ -55,6 +56,9 @@ public class AssetStation {
     public static Animation mediumFishDeadAnimation;
 
     public static Animation pufferFishAnimation;
+
+    public static Animation jetPackAnimation;
+
 
 
 
@@ -91,6 +95,10 @@ public class AssetStation {
     public static TextureRegion pufferAlertTop,pufferAlertBottom;
 
     public static TextureRegion greenDirt;
+
+    public static TextureRegion jetPack1,jetPack2;
+
+    public static TextureRegion pausedText;
 
 
     private static Preferences topHighScore;
@@ -311,6 +319,22 @@ public class AssetStation {
         greenDirt = new TextureRegion(texture, 1544, 1522, 356, 242);
         greenDirt.flip(false, true);
 
+
+        //JetPack
+
+        jetPack1 = new TextureRegion(texture, 1588, 1243, 229, 99);
+        jetPack1.flip(false, true);
+
+        jetPack2 = new TextureRegion(texture, 1588, 1404, 229, 99);
+        jetPack2.flip(false, true);
+
+
+        //Pause Text
+        pausedText = new TextureRegion(texture, 1133, 1972, 726, 171);
+        pausedText.flip(false, true);
+
+
+
         TextureRegion[] small = { smallFishDown, smallFish, smallFishUp };
         smallFishAnimation = new Animation(0.1f, small);
         smallFishAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
@@ -332,6 +356,9 @@ public class AssetStation {
         pufferFishAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
+        TextureRegion[] jet = { jetPack1, jetPack2 };
+        jetPackAnimation = new Animation(0.2f, jet);
+        jetPackAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
 
@@ -366,6 +393,10 @@ public class AssetStation {
         bite = Gdx.audio.newSound(Gdx.files.internal("data/bite.wav"));
         rip = Gdx.audio.newSound(Gdx.files.internal("data/ripfish.mp3"));
         puff = Gdx.audio.newSound(Gdx.files.internal("data/puff.mp3"));
+        superPowerAppeared = Gdx.audio.newSound(Gdx.files.internal("data/superpowerappeared.mp3"));
+        jetsound = Gdx.audio.newSound(Gdx.files.internal("data/jetsound.mp3"));
+
+
 
 
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gamemusic.mp3"));
