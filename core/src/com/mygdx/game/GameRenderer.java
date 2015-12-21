@@ -86,11 +86,11 @@ public class GameRenderer {
 
             batcher2.begin();
 
-            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 570 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
+            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 550 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
                     , gameHeight / 2 + 125 / 2);
 
 
-            AssetStation.font.draw(batcher2, Integer.toString(AssetStation.getHighScore()), 570 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
+            AssetStation.font.draw(batcher2, Integer.toString(AssetStation.getHighScore()), 400 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
                     , gameHeight / 4 + 125 / 2);
 
             batcher2.end();
@@ -328,10 +328,18 @@ public class GameRenderer {
 
             if(myWorld.getSuperEffects().getTypeOfSuperEffect().equals("coinThrow")){
 
-                batcher.draw(AssetStation.coinLarge,
-                        myWorld.getSuperEffects().getxPos(), myWorld.getSuperEffects().getyPos(),
-                        AssetStation.coinLarge.getRegionWidth(), AssetStation.coinLarge.getRegionHeight());
+                if(myWorld.getSuperEffects().hasPlayerThrownCoin()==true) {
+                    batcher.draw(AssetStation.coinLarge,
+                            myWorld.getSuperEffects().getxPos(), myWorld.getSuperEffects().getyPos(),
+                            AssetStation.coinLarge.getRegionWidth(), AssetStation.coinLarge.getRegionHeight());
+                }else{
 
+                    batcher.draw(AssetStation.largeCoinAnimation.getKeyFrame(runTime),
+                            600-AssetStation.coinLargeArr1.getRegionWidth()/2, (1900/2)-AssetStation.coinLargeArr1.getRegionHeight()/2,
+                            AssetStation.coinLargeArr1.getRegionWidth(), AssetStation.coinLargeArr1.getRegionHeight());
+
+
+                }
             }
 
 
@@ -661,7 +669,7 @@ public class GameRenderer {
 
                     } else {
                         batcher.draw(AssetStation.pufferFishAnimation.getKeyFrame(runTime),
-                                myWorld.getPufferFish().getPufferFishRectangle().getX(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                myWorld.getPufferFish().getPufferFishRectangle().getX()+AssetStation.pufferFish.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
                                 -AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
 
                     }
@@ -722,7 +730,7 @@ public class GameRenderer {
                 }
             }
 
-
+/*
             if (myWorld.getJaws().isJawsVisible() == true) {
 
                 if (myWorld.getJaws().isShadowStillDisplayed() == true) {
@@ -765,7 +773,7 @@ public class GameRenderer {
                 }
             }
 
-
+*/
 
 
 

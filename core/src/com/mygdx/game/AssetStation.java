@@ -59,6 +59,9 @@ public class AssetStation {
 
     public static Animation jetPackAnimation;
 
+    public static Animation largeCoinAnimation;
+
+
 
 
 
@@ -88,7 +91,7 @@ public class AssetStation {
     public static TextureRegion redTriangle,yellowTriangle,greenTriangle;
 
 
-    public static TextureRegion coin,coinLarge,coinHealth,coinSpikes;
+    public static TextureRegion coin,coinLarge,coinLargeArr1,coinLargeArr2,coinHealth,coinSpikes;
 
     public static TextureRegion spikesProtection;
 
@@ -162,6 +165,12 @@ public class AssetStation {
         coinLarge = new TextureRegion(texture, 296, 1369, 121, 124);
         coinLarge.flip(false, true);
 
+        coinLargeArr1 = new TextureRegion(texture, 1634, 752, 140, 129);
+        coinLargeArr1.flip(false, true);
+
+        coinLargeArr2 = new TextureRegion(texture, 1634, 1040, 140, 129);
+        coinLargeArr2.flip(false, true);
+
         coinHealth = new TextureRegion(texture, 1639, 1804, 115/*106*/, 103);
         coinHealth.flip(false, true);
 
@@ -190,7 +199,7 @@ public class AssetStation {
 
         //Jaws
 
-        jaws = new TextureRegion(textureJaws, 0, 0, 1200, 920);
+        jaws = new TextureRegion(textureJaws, 0, 0, 1200, 940);
         jaws.flip(false, true);
 
         jawsShadow = new TextureRegion(textureJaws, 0, 950, 1200, 920);
@@ -359,6 +368,10 @@ public class AssetStation {
         TextureRegion[] jet = { jetPack1, jetPack2 };
         jetPackAnimation = new Animation(0.2f, jet);
         jetPackAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+
+        TextureRegion[] coinLargeA = { coinLargeArr1, coinLargeArr2 };
+        largeCoinAnimation = new Animation(0.3f, coinLargeA);
+        largeCoinAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
 

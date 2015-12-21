@@ -9,6 +9,7 @@ import com.badlogic.gdx.InputProcessor;
 public class InputHandler implements InputProcessor {
     private GameWorld world;
     private SuperEffects superEffects;
+    private int count=2;
 
 
 
@@ -58,8 +59,13 @@ public class InputHandler implements InputProcessor {
 
 
         }else if(GameWorld.getGameState().equals("GameOver")){
+            if(count==2) {
 
-            GameWorld.updateGameState("MainScreen");
+                count = 0;
+                GameWorld.updateGameState("MainScreen");
+            }else{
+                count++;
+            }
 
 
         }else if(GameWorld.getGameState().equals("PlayingGame")) {

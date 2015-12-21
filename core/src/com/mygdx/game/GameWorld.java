@@ -75,8 +75,11 @@ public class GameWorld {
                         if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                             xLargeFish.deleteXLargeFish(cur);
-                            playerFish.increasePointsGained();
+                            playerFish.increaseHealthHP();
 
+                            if(superEffects.hasPlayerPickedUpJet()==true) {
+                                playerFish.increasePointsGained();
+                            }
 
                         }else {
                             playerFish.updateStateOfFishByOtherFish("xlarge", cur);
@@ -98,7 +101,11 @@ public class GameWorld {
                         if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                             largeFish.deleteLargeFish(cur);
-                            playerFish.increasePointsGained();
+                            playerFish.increaseHealthHP();
+
+                            if(superEffects.hasPlayerPickedUpJet()==true) {
+                                playerFish.increasePointsGained();
+                            }
 
                         }else {
                             playerFish.updateStateOfFishByOtherFish("large", cur);
@@ -116,7 +123,11 @@ public class GameWorld {
                     if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
                         mediumFish.deleteMediumFish(cur);
-                        playerFish.increasePointsGained();
+                        playerFish.increaseHealthHP();
+
+                        if(superEffects.hasPlayerPickedUpJet()==true) {
+                            playerFish.increasePointsGained();
+                        }
 
                     }else {
                         playerFish.updateStateOfFishByOtherFish("medium", cur);
@@ -147,6 +158,8 @@ public class GameWorld {
                         pufferFish.deletePufferFish();
                         AssetStation.puff.play();
                         playerFish.increasePointsGained();
+                        playerFish.increaseHealthHP();
+
 
 
                     }else {
@@ -168,6 +181,8 @@ public class GameWorld {
                     if(superEffects.getSuperEffectCoinRect().overlaps(xLargeFish.getXLargeFishRectangle(i))){
                         xLargeFish.deleteXLargeFish(i);
                         playerFish.increasePointsGained();
+                        playerFish.increaseHealthHP();
+
                         AssetStation.coinPickUp.play();
                     }
                 }
@@ -176,9 +191,25 @@ public class GameWorld {
                     if (superEffects.getSuperEffectCoinRect().overlaps(largeFish.getLargeFishRectangle(i))) {
                         largeFish.deleteLargeFish(i);
                         playerFish.increasePointsGained();
+                        playerFish.increaseHealthHP();
                         AssetStation.coinPickUp.play();
                     }
                 }
+
+
+
+                for(int i=0;i<mediumFish.getNumberOfMediumFish();i++) {
+                    if (superEffects.getSuperEffectCoinRect().overlaps(mediumFish.getMediumFishRectangle(i))) {
+                        mediumFish.deleteMediumFish(i);
+                        playerFish.increasePointsGained();
+                        playerFish.increaseHealthHP();
+                        AssetStation.coinPickUp.play();
+                    }
+                }
+
+
+
+
             }
 
 
