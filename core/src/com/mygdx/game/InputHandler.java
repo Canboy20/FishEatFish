@@ -29,9 +29,8 @@ public class InputHandler implements InputProcessor {
 
 
 
-    // Ask for a reference to the Bird when InputHandler is created.
     public InputHandler(GameWorld world,SuperEffects superEffects) {
-        // myBird now represents the gameWorld's bird.
+
         this.world = world;
         this.superEffects=superEffects;
     }

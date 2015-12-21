@@ -35,6 +35,17 @@ public class GameRenderer {
     float dirtGreenCountXLarge=5;
     float dirtGreenCountLarge=2;
 
+    PlayerFish bird;
+
+
+    Color clearWater;
+    Color dirty1;
+    Color dirty2;
+    Color dirty3;
+    Color dirty4;
+    Color dirty5;
+    Color dirty6;
+
 
 
 
@@ -42,9 +53,7 @@ public class GameRenderer {
     public GameRenderer(GameWorld world, int gameHeight, int midPointY) {
         myWorld = world;
 
-        // The word "this" refers to this instance.
-        // We are setting the instance variables' values to be that of the
-        // parameters passed in from GameScreen.
+
         this.gameHeight = gameHeight;
         this.midPointY = midPointY;
 
@@ -63,8 +72,20 @@ public class GameRenderer {
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(cam.combined);
 
+        bird = myWorld.getPlayerFish();
+
+
+        clearWater = new Color(0, 1, 0, 0.0f);
+        dirty1 = new Color(0, 1, 0, 0.05f);
+        dirty2 = new Color(0, 1, 0, 0.1f);
+        dirty3 = new Color(0, 1, 0, 0.15f);
+        dirty4 = new Color(0, 1, 0, 0.2f);
+        dirty5 = new Color(0, 1, 0, 0.25f);
+        dirty6 = new Color(0, 1, 0, 0.3f);
+
 
     }
+
 
     public void render(float runTime) {
 
@@ -100,8 +121,7 @@ public class GameRenderer {
         }else if(myWorld.getGameState().equals("PlayingGame") || myWorld.getGameState().equals("paused")) {
 
 
-            // We will move these outside of the loop for performance later.
-            PlayerFish bird = myWorld.getPlayerFish();
+
 
             // Fill the entire screen with black, to prevent potential flickering.
             Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -113,28 +133,18 @@ public class GameRenderer {
             // Draw Background color/*
            /* shapeRenderer.setColor(153 / 255.0f, 204 / 255.0f, 255 / 255.0f, 1);
             shapeRenderer.rect(0, 0, 1200, midPointY + 1200);*/
-/*
-        // Draw Grass
-        shapeRenderer.setColor(111 / 255.0f, 186 / 255.0f, 45 / 255.0f, 1);
-        shapeRenderer.rect(0, midPointY + 66, 136, 11);
 
-        // Draw Dirt
-        shapeRenderer.setColor(147 / 255.0f, 80 / 255.0f, 27 / 255.0f, 1);
-        shapeRenderer.rect(0, midPointY + 77, 136, 52);
-*/
+
             // End ShapeRenderer
             shapeRenderer.end();
 
 
             // Begin SpriteBatch
             batcher.begin();
-            // Disable transparency
-            // This is good for performance when drawing images that do not require
-            // transparency.
+
             batcher.disableBlending();
 
 
-            // The bird needs transparency, so we enable that again.
             batcher.enableBlending();
 
             batcher.draw(AssetStation.background, 0,
@@ -396,10 +406,6 @@ public class GameRenderer {
 
 
             if (myWorld.getPlayerFish().getTypeOfPlayerFish().equals("small")) {
-
-
-                // Draw bird at its coordinates. Retrieve the Animation object from AssetLoader
-                // Pass in the runTime variable to get the current frame.
 
 
 
@@ -787,31 +793,37 @@ public class GameRenderer {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
             if(myWorld.getPlayerFish().getHealthHP()<16){
-                shapeRenderer.setColor(new Color(0, 1, 0, 0.3f));
+                shapeRenderer.setColor(dirty6);
 
 
             }else  if(myWorld.getPlayerFish().getHealthHP()<28){
-                shapeRenderer.setColor(new Color(0, 1, 0, 0.25f));
+                shapeRenderer.setColor(dirty5);
 
 
             }else if(myWorld.getPlayerFish().getHealthHP()<40){
 
-           shapeRenderer.setColor(new Color(0, 1, 0, 0.2f));
-
-       }else if(myWorld.getPlayerFish().getHealthHP()<52){
-            shapeRenderer.setColor(new Color(0, 1, 0, 0.15f));
+                shapeRenderer.setColor(dirty4);
 
 
-        }else if(myWorld.getPlayerFish().getHealthHP()<64){
+            }else if(myWorld.getPlayerFish().getHealthHP()<52){
+                shapeRenderer.setColor(dirty3);
 
-                shapeRenderer.setColor(new Color(0, 1, 0, 0.1f));
+
+            }else if(myWorld.getPlayerFish().getHealthHP()<64){
+
+                shapeRenderer.setColor(dirty2);
+
 
             }else if(myWorld.getPlayerFish().getHealthHP()<76) {
-                shapeRenderer.setColor(new Color(0, 1, 0, 0.05f));
+                shapeRenderer.setColor(dirty1);
+
             }else{
-                shapeRenderer.setColor(new Color(0, 1, 0, 0.0f));
+                shapeRenderer.setColor(clearWater);
+
 
             }
+
+
                 shapeRenderer.rect(0, 0, 1200, 1900);
             shapeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
