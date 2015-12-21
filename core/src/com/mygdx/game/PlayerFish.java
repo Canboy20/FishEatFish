@@ -53,6 +53,8 @@ public class PlayerFish {
 
     private float decreaser=100;
 
+    private Rectangle shrinkedPlayerFishRectangle;
+
 
 
 
@@ -82,6 +84,7 @@ public class PlayerFish {
         currentFishWidth=AssetStation.smallFish.getRegionWidth();
         currentFishHeight=AssetStation.smallFish.getRegionHeight();
         playerFishRectangle=new Rectangle(x,y,currentFishWidth,currentFishHeight);
+        shrinkedPlayerFishRectangle=new Rectangle(x,y,currentFishWidth,currentFishHeight);
 
 
         playerFishIsProtected=false;
@@ -209,6 +212,7 @@ public class PlayerFish {
         }
 
         playerFishRectangle.set(position.x, position.y, currentFishWidth, currentFishHeight);
+        shrinkedPlayerFishRectangle.set(position.x,position.y,currentFishWidth,currentFishHeight);
 
 
 
@@ -271,6 +275,13 @@ public class PlayerFish {
         return playerFishRectangle;
     }
 
+    public Rectangle getShrinkedPlayerFishRectangle(){
+        return shrinkedPlayerFishRectangle;
+
+    }
+
+
+
 /*
     public void makeBirdInvisible(){
 
@@ -296,6 +307,8 @@ public class PlayerFish {
     public float getY() {
         return position.y;
     }
+
+
 
     public float getWidth() {
         return currentFishWidth;
@@ -784,6 +797,7 @@ public class PlayerFish {
         currentFishWidth=AssetStation.smallFish.getRegionWidth();
         currentFishHeight=AssetStation.smallFish.getRegionHeight();
         playerFishRectangle=new Rectangle(0,0,currentFishWidth,currentFishHeight);
+        shrinkedPlayerFishRectangle=new Rectangle(0,0,0,0);
         playerFishIsProtected=false;
 
     }

@@ -70,7 +70,7 @@ public class GameWorld {
 
 
                 for (int cur = 0; cur < xLargeFish.getNumberOfXLargeFish(); cur++) {
-                    if (xLargeFish.getXLargeFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
+                    if (xLargeFish.getXLargeFishRectangle(cur).overlaps(playerFish.getShrinkedPlayerFishRectangle())) {
 
                         if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
@@ -91,7 +91,7 @@ public class GameWorld {
 
 
                 for (int cur = 0; cur < largeFish.getNumberOfLargeFish(); cur++) {
-                    if (largeFish.getLargeFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
+                    if (largeFish.getLargeFishRectangle(cur).overlaps(playerFish.getShrinkedPlayerFishRectangle())) {
 
                         //playerFish.makeBirdInvisible();
 
@@ -110,7 +110,7 @@ public class GameWorld {
 
 
             for (int cur = 0; cur < mediumFish.getNumberOfMediumFish(); cur++) {
-                if (mediumFish.getMediumFishRectangle(cur).overlaps(playerFish.getPlayerFishRectangle())) {
+                if (mediumFish.getMediumFishRectangle(cur).overlaps(playerFish.getShrinkedPlayerFishRectangle())) {
 
                     //playerFish.makeBirdInvisible();
                     if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
@@ -129,7 +129,7 @@ public class GameWorld {
             //If jaws is visible, check collision
             if(jaws.isJawsVisible()==true){
 
-                if(playerFish.getPlayerFishRectangle().overlaps(jaws.getJawsRectangle())){
+                if(playerFish.getShrinkedPlayerFishRectangle().overlaps(jaws.getJawsRectangle())){
 
                     playerFish.updateStateOfFishByJaws();
 
@@ -138,9 +138,9 @@ public class GameWorld {
             }
 
 
-            if(pufferFish.isPufferFishIsAvailable()==true || superEffects.hasPlayerPickedUpJet()==true ){
+            if(pufferFish.isPufferFishIsAvailable()==true  ){
 
-                if(playerFish.getPlayerFishRectangle().overlaps(pufferFish.getPufferFishRectangle())){
+                if(playerFish.getShrinkedPlayerFishRectangle().overlaps(pufferFish.getPufferFishRectangle())){
 
                     if(playerFish.isPlayerFishProtected()==true || superEffects.hasPlayerPickedUpJet()==true){
 
@@ -184,7 +184,7 @@ public class GameWorld {
 
             if(superEffects.getTypeOfSuperEffect().equals("jet") && superEffects.hasPlayerPickedUpJet()==false && playerFish.getTypeOfPlayerFish().equals("small")){
 
-                if(playerFish.getPlayerFishRectangle().overlaps(superEffects.getSuperEffectCoinRect())){
+                if(playerFish.getShrinkedPlayerFishRectangle().overlaps(superEffects.getSuperEffectCoinRect())){
 
                     superEffects.playerHasPickedUpJet();
                     playerFish.increaseMuliplier();
@@ -207,7 +207,7 @@ public class GameWorld {
 
             //Check coin collision. If collides, you gain a point!!!
             if(coin.isCoinAvailabke()==true){
-                if(playerFish.getPlayerFishRectangle().overlaps(coin.getCoinRect()) && playerFish.getTypeOfPlayerFish().equals("small")) {
+                if(playerFish.getShrinkedPlayerFishRectangle().overlaps(coin.getCoinRect()) && playerFish.getTypeOfPlayerFish().equals("small")) {
 
                     if (coin.getCoinType().equals("coin")) {
                         coin.makeCoinNotAvailable();
@@ -229,7 +229,7 @@ public class GameWorld {
 
 
             if(coin.isCoinAvailabke2()==true){
-                if(playerFish.getPlayerFishRectangle().overlaps(coin.getCoinRect2()) && playerFish.getTypeOfPlayerFish().equals("small")){
+                if(playerFish.getShrinkedPlayerFishRectangle().overlaps(coin.getCoinRect2()) && playerFish.getTypeOfPlayerFish().equals("small")){
 
                     if(coin.getCoin2Type().equals("coin")) {
                         coin.makeCoinNotAvailable2();
@@ -261,7 +261,7 @@ public class GameWorld {
 
                     spike.spikeHasBeenUsed();
 
-                }else if (spike.getSpikeRect().overlaps(playerFish.getPlayerFishRectangle())) {
+                }else if (spike.getSpikeRect().overlaps(playerFish.getShrinkedPlayerFishRectangle())) {
 
                     playerFish.updateStateOfFishBySpikeOrPufferFish();
                     spike.spikeHasBeenUsed();
@@ -279,7 +279,7 @@ public class GameWorld {
 
                     spike.spikeHasBeenUsed2();
 
-                }else if (spike.getSpikeRect2().overlaps(playerFish.getPlayerFishRectangle())) {
+                }else if (spike.getSpikeRect2().overlaps(playerFish.getShrinkedPlayerFishRectangle())) {
 
 
                     playerFish.updateStateOfFishBySpikeOrPufferFish();
