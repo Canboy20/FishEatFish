@@ -1,10 +1,10 @@
-package com.mygdx.game.android;
+package com.mygdx.game.FishEatFishCanAtay;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.game.FishEatFishMain;
+import com.mygdx.core.FishEatFishMain;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

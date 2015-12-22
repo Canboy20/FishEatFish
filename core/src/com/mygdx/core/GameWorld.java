@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.core;
 
 /**
  * Created by Can Atay on 11/10/2015.
@@ -27,7 +27,7 @@ public class GameWorld {
 
         playerFish = new PlayerFish(this,400, midPointY - 5,35, 34);
         jaws=new Jaws(1200, 920);
-        pufferFish=new PufferFish(0,0,AssetStation.pufferFish.getRegionWidth()-100, AssetStation.pufferFish.getRegionHeight());
+        pufferFish=new PufferFish(0,0, AssetStation.pufferFish.getRegionWidth()-100, AssetStation.pufferFish.getRegionHeight());
         xLargeFish =new XLargeFish(0,0,550, 323);
         largeFish =new LargeFish(800,midPointY,395, 236);
         mediumFish=new MediumFish(0,0,234, 214);
@@ -208,9 +208,19 @@ public class GameWorld {
                 }
 
 
+                if(pufferFish.isPufferFishIsAvailable()==true ){
 
+                    if(superEffects.getSuperEffectCoinRect().overlaps(pufferFish.getPufferFishRectangle())){
+
+                        pufferFish.deletePufferFish();
+                        AssetStation.coinPickUp.play();
+                    }
+
+                }
 
             }
+
+
 
 
             if(superEffects.getTypeOfSuperEffect().equals("jet") && superEffects.hasPlayerPickedUpJet()==false && playerFish.getTypeOfPlayerFish().equals("small")){

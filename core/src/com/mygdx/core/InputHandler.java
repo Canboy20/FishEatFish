@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -13,7 +13,7 @@ public class InputHandler implements InputProcessor {
 
 
 
-    public static float positX=600-AssetStation.coin.getRegionWidth()/2;  //T
+    public static float positX=600- AssetStation.coin.getRegionWidth()/2;  //T
     public static float positY=0;//T
     public static float velocity=0; //T
     public boolean situationMiddle=false;
@@ -71,8 +71,8 @@ public class InputHandler implements InputProcessor {
 
 
             //TESTING
-            if(superEffects.getTypeOfSuperEffect().equals("coinThrow") && superEffects.hasPlayerThrownCoin()==false && screenX*ratioX>(600-AssetStation.coinLarge.getRegionWidth()/2) && screenX*ratioX< (600-AssetStation.coinLarge.getRegionWidth()/2) + AssetStation.coinLarge.getRegionWidth() &&
-                    screenY*ratioY>(1900/2)-AssetStation.coinLarge.getRegionHeight()/2 && screenY*ratioY<((1900/2)-AssetStation.coinLarge.getRegionHeight()/2) + AssetStation.coinLarge.getRegionHeight() ){
+            if(superEffects.getTypeOfSuperEffect().equals("coinThrow") && superEffects.hasPlayerThrownCoin()==false && screenX*ratioX>(600- AssetStation.coinLarge.getRegionWidth()/2) && screenX*ratioX< (600- AssetStation.coinLarge.getRegionWidth()/2) + AssetStation.coinLarge.getRegionWidth() &&
+                    screenY*ratioY>(1900/2)- AssetStation.coinLarge.getRegionHeight()/2 && screenY*ratioY<((1900/2)- AssetStation.coinLarge.getRegionHeight()/2) + AssetStation.coinLarge.getRegionHeight() ){
                 AssetStation.healthgained.play();
                 situationMiddle=true;
                 previousX=screenX;

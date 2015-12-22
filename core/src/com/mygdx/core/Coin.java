@@ -1,10 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-
-import java.util.ArrayList;
 
 /**
  * Created by Can Atay on 11/12/2015.
@@ -72,7 +70,7 @@ public class Coin {
 
         }else{
             positionCoin.add(velocityCoin.cpy().scl(delta));
-            coinRect.set(positionCoin.x,positionCoin.y,AssetStation.coin.getRegionWidth(),AssetStation.coin.getRegionHeight());
+            coinRect.set(positionCoin.x,positionCoin.y, AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
 
             if(velocityCoin.y<0 && positionCoin.y<-AssetStation.coin.getRegionHeight()){
@@ -106,7 +104,7 @@ public class Coin {
 
         }else{
             positionCoin2.add(velocityCoin2.cpy().scl(delta));
-            coinRect2.set(positionCoin2.x,positionCoin2.y,AssetStation.coin.getRegionWidth(),AssetStation.coin.getRegionHeight());
+            coinRect2.set(positionCoin2.x,positionCoin2.y, AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
 
             if(velocityCoin2.y<0 && positionCoin2.y<-AssetStation.coin.getRegionHeight()){
@@ -178,7 +176,7 @@ public class Coin {
 
 
         }
-        coinRect.set(positionCoin.x,positionCoin.y,AssetStation.coin.getRegionWidth(),AssetStation.coin.getRegionHeight());
+        coinRect.set(positionCoin.x,positionCoin.y, AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
     }
 
@@ -257,7 +255,7 @@ public class Coin {
 
 
         }
-        coinRect2.set(positionCoin2.x,positionCoin2.y,AssetStation.coin.getRegionWidth(),AssetStation.coin.getRegionHeight());
+        coinRect2.set(positionCoin2.x,positionCoin2.y, AssetStation.coin.getRegionWidth(), AssetStation.coin.getRegionHeight());
 
     }
 

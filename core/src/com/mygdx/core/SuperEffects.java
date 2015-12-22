@@ -1,10 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-
-import java.util.Vector;
 
 /**
  * Created by Can Atay on 12/14/2015.
@@ -23,7 +21,7 @@ public class SuperEffects {
     private float delay=2;
     private float jetDuration=15;
 
-    private float regenerate=5;
+    private float regenerate=30;
     private int randomPower;
 
 
@@ -32,7 +30,7 @@ public class SuperEffects {
 
 
         superEffectType="none";
-        Pos=new Vector2(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
+        Pos=new Vector2(600- AssetStation.coinLarge.getRegionWidth()/2,(1900/2)- AssetStation.coinLarge.getRegionHeight()/2);
         Velocity=new Vector2(0,0);
 
         playerThrewCoin=false;
@@ -95,7 +93,7 @@ public class SuperEffects {
                         superEffectType="none";
                         playerThrewCoin=false;
                         regenerate=100;
-                        Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
+                        Pos.set(600- AssetStation.coinLarge.getRegionWidth()/2,(1900/2)- AssetStation.coinLarge.getRegionHeight()/2);
 
                     }
 
@@ -118,7 +116,7 @@ public class SuperEffects {
 
 
             if(playerPickedUpJet==false) {
-                superEffectCoinRect.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2,  AssetStation.jetPack1.getRegionWidth(),  AssetStation.jetPack1.getRegionHeight());
+                superEffectCoinRect.set(600- AssetStation.coinLarge.getRegionWidth()/2,(1900/2)- AssetStation.coinLarge.getRegionHeight()/2,  AssetStation.jetPack1.getRegionWidth(),  AssetStation.jetPack1.getRegionHeight());
             }else{
 
                 jetDuration=jetDuration-delta;
@@ -128,7 +126,7 @@ public class SuperEffects {
                     playerPickedUpJet=false;
                     jetDuration=15;
                     regenerate=100;
-                    Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
+                    Pos.set(600- AssetStation.coinLarge.getRegionWidth()/2,(1900/2)- AssetStation.coinLarge.getRegionHeight()/2);
 
 
                 }
@@ -158,7 +156,7 @@ public class SuperEffects {
 
     public void checkBounce(){
 
-        if(Pos.x+AssetStation.coinLarge.getRegionWidth()>1200){
+        if(Pos.x+ AssetStation.coinLarge.getRegionWidth()>1200){
 
             Velocity.x=-Velocity.x;
 
@@ -170,7 +168,7 @@ public class SuperEffects {
 
 
 
-        if(Pos.y+AssetStation.coinLarge.getRegionHeight()>1900){
+        if(Pos.y+ AssetStation.coinLarge.getRegionHeight()>1900){
 
             Velocity.y=-Velocity.y;
         }else if(Pos.y<0){
@@ -255,9 +253,9 @@ public class SuperEffects {
 
         delay=2;
         jetDuration=15;
-        regenerate=5;
+        regenerate=30;
         superEffectType="none";
-        Pos.set(600-AssetStation.coinLarge.getRegionWidth()/2,(1900/2)-AssetStation.coinLarge.getRegionHeight()/2);
+        Pos.set(600- AssetStation.coinLarge.getRegionWidth()/2,(1900/2)- AssetStation.coinLarge.getRegionHeight()/2);
         Velocity.set(0,0);
         playerThrewCoin=false;
         playerPickedUpJet=false;

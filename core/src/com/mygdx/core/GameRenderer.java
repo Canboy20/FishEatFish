@@ -1,11 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -30,7 +28,7 @@ public class GameRenderer {
     private int gameHeight;
 
 
-    float ssssssss=600 -AssetStation.coin.getRegionWidth()/2;
+    float ssssssss=600 - AssetStation.coin.getRegionWidth()/2;
 
     float dirtGreenCountXLarge=5;
     float dirtGreenCountLarge=2;
@@ -107,11 +105,11 @@ public class GameRenderer {
 
             batcher2.begin();
 
-            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 550 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
+            AssetStation.font.draw(batcher2, Integer.toString(myWorld.getPlayerFish().getPointsGained()), 550 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 100)
                     , gameHeight / 2 + 125 / 2);
 
 
-            AssetStation.font.draw(batcher2, Integer.toString(AssetStation.getHighScore()), 400 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 50)
+            AssetStation.font.draw(batcher2, Integer.toString(AssetStation.getHighScore()), 550 - (((int) Math.floor(Math.log10(myWorld.getPlayerFish().getPointsGained()) + 1) - 1) * 100)
                     , gameHeight / 4 + 125 / 2);
 
             batcher2.end();
@@ -345,7 +343,7 @@ public class GameRenderer {
                 }else{
 
                     batcher.draw(AssetStation.largeCoinAnimation.getKeyFrame(runTime),
-                            600-AssetStation.coinLargeArr1.getRegionWidth()/2, (1900/2)-AssetStation.coinLargeArr1.getRegionHeight()/2,
+                            600- AssetStation.coinLargeArr1.getRegionWidth()/2, (1900/2)- AssetStation.coinLargeArr1.getRegionHeight()/2,
                             AssetStation.coinLargeArr1.getRegionWidth(), AssetStation.coinLargeArr1.getRegionHeight());
 
 
@@ -359,7 +357,7 @@ public class GameRenderer {
                 if (myWorld.getSuperEffects().hasPlayerPickedUpJet() == false) {
 
                     batcher.draw(AssetStation.jetPackAnimation.getKeyFrame(runTime),
-                            myWorld.getSuperEffects().getxPos()-AssetStation.jetPack1.getRegionWidth()/2, myWorld.getSuperEffects().getyPos(),
+                            myWorld.getSuperEffects().getxPos()- AssetStation.jetPack1.getRegionWidth()/2, myWorld.getSuperEffects().getyPos(),
                             AssetStation.jetPack1.getRegionWidth(), AssetStation.jetPack1.getRegionHeight());
 
 
@@ -675,7 +673,7 @@ public class GameRenderer {
 
                     } else {
                         batcher.draw(AssetStation.pufferFishAnimation.getKeyFrame(runTime),
-                                myWorld.getPufferFish().getPufferFishRectangle().getX()+AssetStation.pufferFish.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
+                                myWorld.getPufferFish().getPufferFishRectangle().getX()+ AssetStation.pufferFish.getRegionWidth(), myWorld.getPufferFish().getPufferFishRectangle().getY(),
                                 -AssetStation.pufferFish.getRegionWidth(), AssetStation.pufferFish.getRegionHeight());
 
                     }

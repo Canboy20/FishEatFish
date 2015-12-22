@@ -1,10 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-
-import java.util.ArrayList;
 
 /**
  * Created by Can Atay on 11/22/2015.
